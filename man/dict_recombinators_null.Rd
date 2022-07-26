@@ -26,13 +26,15 @@ Supported \code{\link[paradox:Param]{Param}} classes are: \code{\link[paradox:Pa
 
 This \code{\link{Recombinator}} can be created with the short access form \code{\link[=rec]{rec()}}
 (\code{\link[=recs]{recs()}} to get a list), or through the the \link[mlr3misc:Dictionary]{dictionary}
-\code{\link{dict_recombinators}} in the following way:\preformatted{# preferred:
+\code{\link{dict_recombinators}} in the following way:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# preferred:
 rec("null")
 recs("null")  # takes vector IDs, returns list of Recombinators
 
 # long form:
 dict_recombinators$get("null")
-}
+}\if{html}{\out{</div>}}
 }
 
 \examples{
@@ -59,28 +61,28 @@ Other recombinators:
 }
 \concept{recombinators}
 \section{Super classes}{
-\code{\link[miesmuschel:MiesOperator]{miesmuschel::MiesOperator}} -> \code{\link[miesmuschel:Recombinator]{miesmuschel::Recombinator}} -> \code{RecombinatorNull}
+\code{\link[smashy:MiesOperator]{smashy::MiesOperator}} -> \code{\link[smashy:Recombinator]{smashy::Recombinator}} -> \code{RecombinatorNull}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{RecombinatorNull$new()}}
-\item \href{#method-clone}{\code{RecombinatorNull$clone()}}
+\item \href{#method-RecombinatorNull-new}{\code{RecombinatorNull$new()}}
+\item \href{#method-RecombinatorNull-clone}{\code{RecombinatorNull$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="operate">}\href{../../miesmuschel/html/MiesOperator.html#method-operate}{\code{miesmuschel::MiesOperator$operate()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="prime">}\href{../../miesmuschel/html/MiesOperator.html#method-prime}{\code{miesmuschel::MiesOperator$prime()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="print">}\href{../../miesmuschel/html/MiesOperator.html#method-print}{\code{miesmuschel::MiesOperator$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="repr">}\href{../../miesmuschel/html/MiesOperator.html#method-repr}{\code{miesmuschel::MiesOperator$repr()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="prime"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-prime'><code>smashy::MiesOperator$prime()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-RecombinatorNull-new"></a>}}
+\if{latex}{\out{\hypertarget{method-RecombinatorNull-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize base class components of the \code{Recombinator}.
 \subsection{Usage}{
@@ -109,8 +111,8 @@ The \verb{$n_indivs_out} field will reflect this value.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-RecombinatorNull-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-RecombinatorNull-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

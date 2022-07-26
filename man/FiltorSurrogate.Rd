@@ -50,7 +50,7 @@ Other filtors:
 \concept{base classes}
 \concept{filtors}
 \section{Super classes}{
-\code{\link[miesmuschel:MiesOperator]{miesmuschel::MiesOperator}} -> \code{\link[miesmuschel:Filtor]{miesmuschel::Filtor}} -> \code{FiltorSurrogate}
+\code{\link[smashy:MiesOperator]{smashy::MiesOperator}} -> \code{\link[smashy:Filtor]{smashy::Filtor}} -> \code{FiltorSurrogate}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -66,24 +66,24 @@ Regression learner for the surrogate model filtering algorithm.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{FiltorSurrogate$new()}}
-\item \href{#method-prime}{\code{FiltorSurrogate$prime()}}
-\item \href{#method-clone}{\code{FiltorSurrogate$clone()}}
+\item \href{#method-FiltorSurrogate-new}{\code{FiltorSurrogate$new()}}
+\item \href{#method-FiltorSurrogate-prime}{\code{FiltorSurrogate$prime()}}
+\item \href{#method-FiltorSurrogate-clone}{\code{FiltorSurrogate$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="operate">}\href{../../miesmuschel/html/MiesOperator.html#method-operate}{\code{miesmuschel::MiesOperator$operate()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="print">}\href{../../miesmuschel/html/MiesOperator.html#method-print}{\code{miesmuschel::MiesOperator$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="repr">}\href{../../miesmuschel/html/MiesOperator.html#method-repr}{\code{miesmuschel::MiesOperator$repr()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="Filtor" data-id="needed_input">}\href{../../miesmuschel/html/Filtor.html#method-needed_input}{\code{miesmuschel::Filtor$needed_input()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="Filtor" data-id="needed_input"><a href='../../smashy/html/Filtor.html#method-Filtor-needed_input'><code>smashy::Filtor$needed_input()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-FiltorSurrogate-new"></a>}}
+\if{latex}{\out{\hypertarget{method-FiltorSurrogate-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FiltorSurrogate$new(
@@ -127,8 +127,8 @@ The \verb{$dict_entry} field will reflect this value.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-prime"></a>}}
-\if{latex}{\out{\hypertarget{method-prime}{}}}
+\if{html}{\out{<a id="method-FiltorSurrogate-prime"></a>}}
+\if{latex}{\out{\hypertarget{method-FiltorSurrogate-prime}{}}}
 \subsection{Method \code{prime()}}{
 See \code{\link{MiesOperator}} method. Primes both this operator, as well as the wrapped operator
 given to \code{surrogate_selector} during construction.
@@ -149,8 +149,8 @@ Passed to \code{\link{MiesOperator}}\verb{$prime()}.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-FiltorSurrogate-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-FiltorSurrogate-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

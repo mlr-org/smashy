@@ -11,8 +11,10 @@
 Predict the ratio of two \code{\link{PredictionDensity}} inputs as \code{\link{PredictionRegr}}, dividing the input to \code{"numerator"} by the input to \code{"denominator"}.
 }
 \section{Construction}{
-\preformatted{PipeOpDensityRatio$new(id = "densityratio", param_vals = list())
-}
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{PipeOpDensityRatio$new(id = "densityratio", param_vals = list())
+}\if{html}{\out{</div>}}
 \itemize{
 \item \code{id} :: \code{character(1)}\cr
 Identifier of the resulting object, default \code{"densityratio"}.
@@ -77,22 +79,23 @@ Other BOHB implementing operations:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{PipeOpDensityRatio$new()}}
-\item \href{#method-clone}{\code{PipeOpDensityRatio$clone()}}
+\item \href{#method-PipeOpDensityRatio-new}{\code{PipeOpDensityRatio$new()}}
+\item \href{#method-PipeOpDensityRatio-clone}{\code{PipeOpDensityRatio$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="predict">}\href{../../mlr3pipelines/html/PipeOp.html#method-predict}{\code{mlr3pipelines::PipeOp$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="print">}\href{../../mlr3pipelines/html/PipeOp.html#method-print}{\code{mlr3pipelines::PipeOp$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="train">}\href{../../mlr3pipelines/html/PipeOp.html#method-train}{\code{mlr3pipelines::PipeOp$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="help"><a href='../../mlr3pipelines/html/PipeOp.html#method-PipeOp-help'><code>mlr3pipelines::PipeOp$help()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="predict"><a href='../../mlr3pipelines/html/PipeOp.html#method-PipeOp-predict'><code>mlr3pipelines::PipeOp$predict()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="print"><a href='../../mlr3pipelines/html/PipeOp.html#method-PipeOp-print'><code>mlr3pipelines::PipeOp$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="train"><a href='../../mlr3pipelines/html/PipeOp.html#method-PipeOp-train'><code>mlr3pipelines::PipeOp$train()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-PipeOpDensityRatio-new"></a>}}
+\if{latex}{\out{\hypertarget{method-PipeOpDensityRatio-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PipeOpDensityRatio$new(id = "densityratio", param_vals = list())}\if{html}{\out{</div>}}
@@ -100,8 +103,8 @@ Other BOHB implementing operations:
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-PipeOpDensityRatio-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-PipeOpDensityRatio-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

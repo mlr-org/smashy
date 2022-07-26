@@ -14,8 +14,10 @@ for each stratum according to \code{stratify_feature}.
 \verb{# TODO: missing: 'build only the model with the highest stratify param value'}
 }
 \section{Construction}{
-\preformatted{PipeOpStratify$new(id = "stratify", param_vals = list())
-}
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{PipeOpStratify$new(id = "stratify", param_vals = list())
+}\if{html}{\out{</div>}}
 \itemize{
 \item \code{id} :: \code{character(1)}
 Identifier of the resulting object, default \code{"stratify"}.
@@ -94,22 +96,23 @@ Other Experimental Features:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{PipeOpStratify$new()}}
-\item \href{#method-clone}{\code{PipeOpStratify$clone()}}
+\item \href{#method-PipeOpStratify-new}{\code{PipeOpStratify$new()}}
+\item \href{#method-PipeOpStratify-clone}{\code{PipeOpStratify$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="predict">}\href{../../mlr3pipelines/html/PipeOp.html#method-predict}{\code{mlr3pipelines::PipeOp$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="print">}\href{../../mlr3pipelines/html/PipeOp.html#method-print}{\code{mlr3pipelines::PipeOp$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="train">}\href{../../mlr3pipelines/html/PipeOp.html#method-train}{\code{mlr3pipelines::PipeOp$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="help"><a href='../../mlr3pipelines/html/PipeOp.html#method-PipeOp-help'><code>mlr3pipelines::PipeOp$help()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="predict"><a href='../../mlr3pipelines/html/PipeOp.html#method-PipeOp-predict'><code>mlr3pipelines::PipeOp$predict()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="print"><a href='../../mlr3pipelines/html/PipeOp.html#method-PipeOp-print'><code>mlr3pipelines::PipeOp$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3pipelines" data-topic="PipeOp" data-id="train"><a href='../../mlr3pipelines/html/PipeOp.html#method-PipeOp-train'><code>mlr3pipelines::PipeOp$train()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-PipeOpStratify-new"></a>}}
+\if{latex}{\out{\hypertarget{method-PipeOpStratify-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PipeOpStratify$new(id = "stratify", param_vals = list())}\if{html}{\out{</div>}}
@@ -117,8 +120,8 @@ Other Experimental Features:
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-PipeOpStratify-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-PipeOpStratify-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

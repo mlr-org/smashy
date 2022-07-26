@@ -44,13 +44,15 @@ See \code{\link{FiltorSurrogate}} about supported operand types.
 
 This \code{\link{Filtor}} can be created with the short access form \code{\link[=ftr]{ftr()}}
 (\code{\link[=ftrs]{ftrs()}} to get a list), or through the the \link[mlr3misc:Dictionary]{dictionary}
-\code{\link{dict_filtors}} in the following way:\preformatted{# preferred:
+\code{\link{dict_filtors}} in the following way:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# preferred:
 ftr("surtour", <surrogate_learner> [, <surrogate_selector>])
 ftrs("surtour", <surrogate_learner> [, <surrogate_selector>])  # takes vector IDs, returns list of Filtors
 
 # long form:
 dict_filtors$get("surtour", <surrogate_learner> [, <surrogate_selector>])
-}
+}\if{html}{\out{</div>}}
 }
 
 \examples{
@@ -81,29 +83,29 @@ Other filtors:
 }
 \concept{filtors}
 \section{Super classes}{
-\code{\link[miesmuschel:MiesOperator]{miesmuschel::MiesOperator}} -> \code{\link[miesmuschel:Filtor]{miesmuschel::Filtor}} -> \code{\link[miesmuschel:FiltorSurrogate]{miesmuschel::FiltorSurrogate}} -> \code{FiltorSurrogateTournament}
+\code{\link[smashy:MiesOperator]{smashy::MiesOperator}} -> \code{\link[smashy:Filtor]{smashy::Filtor}} -> \code{\link[smashy:FiltorSurrogate]{smashy::FiltorSurrogate}} -> \code{FiltorSurrogateTournament}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{FiltorSurrogateTournament$new()}}
-\item \href{#method-clone}{\code{FiltorSurrogateTournament$clone()}}
+\item \href{#method-FiltorSurrogateTournament-new}{\code{FiltorSurrogateTournament$new()}}
+\item \href{#method-FiltorSurrogateTournament-clone}{\code{FiltorSurrogateTournament$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="operate">}\href{../../miesmuschel/html/MiesOperator.html#method-operate}{\code{miesmuschel::MiesOperator$operate()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="print">}\href{../../miesmuschel/html/MiesOperator.html#method-print}{\code{miesmuschel::MiesOperator$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="repr">}\href{../../miesmuschel/html/MiesOperator.html#method-repr}{\code{miesmuschel::MiesOperator$repr()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="Filtor" data-id="needed_input">}\href{../../miesmuschel/html/Filtor.html#method-needed_input}{\code{miesmuschel::Filtor$needed_input()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="FiltorSurrogate" data-id="prime">}\href{../../miesmuschel/html/FiltorSurrogate.html#method-prime}{\code{miesmuschel::FiltorSurrogate$prime()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="Filtor" data-id="needed_input"><a href='../../smashy/html/Filtor.html#method-Filtor-needed_input'><code>smashy::Filtor$needed_input()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="FiltorSurrogate" data-id="prime"><a href='../../smashy/html/FiltorSurrogate.html#method-FiltorSurrogate-prime'><code>smashy::FiltorSurrogate$prime()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-FiltorSurrogateTournament-new"></a>}}
+\if{latex}{\out{\hypertarget{method-FiltorSurrogateTournament-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FiltorSurrogateTournament$new(
@@ -127,8 +129,8 @@ The \verb{$surrogate_selector} field will reflect this value.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-FiltorSurrogateTournament-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-FiltorSurrogateTournament-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

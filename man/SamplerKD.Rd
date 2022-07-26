@@ -16,22 +16,22 @@ This currently hardcodes lots of things.
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{SamplerKD$new()}}
-\item \href{#method-clone}{\code{SamplerKD$clone()}}
+\item \href{#method-SamplerKD-new}{\code{SamplerKD$new()}}
+\item \href{#method-SamplerKD-clone}{\code{SamplerKD$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="paradox" data-topic="Sampler" data-id="format">}\href{../../paradox/html/Sampler.html#method-format}{\code{paradox::Sampler$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="paradox" data-topic="Sampler" data-id="print">}\href{../../paradox/html/Sampler.html#method-print}{\code{paradox::Sampler$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="paradox" data-topic="Sampler" data-id="sample">}\href{../../paradox/html/Sampler.html#method-sample}{\code{paradox::Sampler$sample()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="paradox" data-topic="Sampler" data-id="format"><a href='../../paradox/html/Sampler.html#method-Sampler-format'><code>paradox::Sampler$format()</code></a></li>
+<li><span class="pkg-link" data-pkg="paradox" data-topic="Sampler" data-id="print"><a href='../../paradox/html/Sampler.html#method-Sampler-print'><code>paradox::Sampler$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="paradox" data-topic="Sampler" data-id="sample"><a href='../../paradox/html/Sampler.html#method-Sampler-sample'><code>paradox::Sampler$sample()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-SamplerKD-new"></a>}}
+\if{latex}{\out{\hypertarget{method-SamplerKD-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize the \code{SamplerKD} object.
 \subsection{Usage}{
@@ -62,8 +62,8 @@ Whether outcome in \code{task} is to be minimized.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-SamplerKD-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-SamplerKD-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

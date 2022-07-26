@@ -4,6 +4,7 @@
 #' @import paradox
 #' @import R6
 #' @import data.table
+#' @import mlr3pipelines
 #'
 #' @description
 #'

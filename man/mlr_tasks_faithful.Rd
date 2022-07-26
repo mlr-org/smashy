@@ -10,8 +10,10 @@
 A density estimation task for the \code{\link[datasets:faithful]{datasets::faithful}} dataset.
 }
 \section{Construction}{
-\preformatted{tsk("faithful")
-}
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{tsk("faithful")
+}\if{html}{\out{</div>}}
 }
 
 \seealso{

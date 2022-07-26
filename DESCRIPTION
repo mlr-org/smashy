@@ -30,7 +30,7 @@ Suggests:
   ranger,
   xgboost,
   rpart
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Collate: 
     'DensityLearner.R'
     'DensityMeasure.R'
@@ -90,8 +90,9 @@ Collate:
     'TerminatorBudget.R'
     'TerminatorGenerations.R'
     'TunerMies.R'
-    'TunerSmash.R'
+    'TunerSmashy.R'
     'bibentries.R'
+    'configure_smashy.R'
     'repr.R'
     'utils.R'
     'utils_hb.R'

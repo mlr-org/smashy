@@ -1,6 +1,6 @@
 
 # --- possible surrogate learners
-
+prepare_learnerlist = function() {
 # Imputation pipeline; needs to be robust against NAs that only occur during prediction
 imputepl <- po("imputeoor", offset = 1, multiplier = 10) %>>% po("fixfactors") %>>% po("imputesample")
 
@@ -50,6 +50,9 @@ learnerlist$bohblrn$graph$pipeops$stratify$param_set$values$stratify_feature = C
 # GraphLearner doesn't know that it is a regression learner
 # we have to set this explicitly to pass assertions later.
 learnerlist <- lapply(learnerlist, function(x) { class(x) <- c("LearnerRegr", class(x)) ; x })
+
+learnerlist
+}
 
 # --- bohb-like sampling
 generate_design_bohb = ContextPV(function(inst) function(param_set, n) {
@@ -238,6 +241,9 @@ configure_smashy <- function(search_space, budget_log_step, mu,
   assert_choice(sample, c("random", "bohb"))
   assert_choice(batch_method, c("smashy", "hb"))
 
+  learnerlist = prepare_learnerlist()
+  
+  
   # Surrogate Options
   assert_choice(filter_algorithm, c("tournament", "progressive"))  # The two implemented filter algorithms
   assert_choice(surrogate_learner, names(learnerlist))

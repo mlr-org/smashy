@@ -62,7 +62,7 @@ Other selectors:
 \concept{base classes}
 \concept{selectors}
 \section{Super class}{
-\code{\link[miesmuschel:MiesOperator]{miesmuschel::MiesOperator}} -> \code{Selector}
+\code{\link[smashy:MiesOperator]{smashy::MiesOperator}} -> \code{Selector}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -75,23 +75,23 @@ Optimization supported by this \code{Selector}, can be \code{"single-crit"}, \co
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{Selector$new()}}
-\item \href{#method-clone}{\code{Selector$clone()}}
+\item \href{#method-Selector-new}{\code{Selector$new()}}
+\item \href{#method-Selector-clone}{\code{Selector$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="operate">}\href{../../miesmuschel/html/MiesOperator.html#method-operate}{\code{miesmuschel::MiesOperator$operate()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="prime">}\href{../../miesmuschel/html/MiesOperator.html#method-prime}{\code{miesmuschel::MiesOperator$prime()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="print">}\href{../../miesmuschel/html/MiesOperator.html#method-print}{\code{miesmuschel::MiesOperator$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="miesmuschel" data-topic="MiesOperator" data-id="repr">}\href{../../miesmuschel/html/MiesOperator.html#method-repr}{\code{miesmuschel::MiesOperator$repr()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="prime"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-prime'><code>smashy::MiesOperator$prime()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-Selector-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Selector-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize base class components of the \code{Selector}.
 \subsection{Usage}{
@@ -149,8 +149,8 @@ the \code{param_set} argument is not a list of expressions.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-Selector-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-Selector-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
