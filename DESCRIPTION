@@ -20,12 +20,13 @@ Imports:
   bbotk (>= 0.3.0.900),
   data.table,
   matrixStats,
+  mlr3learners,
+  mlr3pipelines,
   lgr
 Suggests:
   tinytest,
   mlr3tuning,
   mlr3,
-  mlr3learners,
   ranger,
   xgboost,
   rpart
