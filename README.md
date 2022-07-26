@@ -8,6 +8,9 @@
 
 Although `smashy` is currently still evolving, it can already be used for optimization. All exported functions (should) work and are [documented](https://mlr-org.github.io/smashy/reference/index.html).
 
+`smashy` itself is functionally complete and will find its way to CRAN. In its current shape, it contains many auxiliary
+classes that will be part of the [`miesmuschel`](https://github.com/mlr-org/miesmuschel) package instead, however.
+
 ## Installation
 
 Install the github version, as well as some dependencies, using `remotes`. 
@@ -60,8 +63,3 @@ smashy = configure_smashy(search_space, budget_log_step = log(4), mu = 6)
 
 smashy$optimize(oi)
 ```
-
-## Package Status
-
-`smashy` is functionally complete and will find its way to CRAN. In its current shape, it contains many auxiliary
-classes that will be part of the [`miesmuschel`](https://github.com/mlr-org/miesmuschel) package instead, however.
