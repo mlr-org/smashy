@@ -70,7 +70,7 @@ TerminatorBudget = R6Class("TerminatorBudget", inherit = Terminator,
         length(budget_id), str_collapse(budget_id))
 
       origin = params$aggregate(NULL)
-      aggregated = params$aggregate(archive$data[[budget_id]])
+      aggregated = params$aggregate(map_dbl(archive$data$x_domain, budget_id))
 
       c(
         max_steps = if (params$budget <= origin) 0 else 100,
