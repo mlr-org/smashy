@@ -206,7 +206,7 @@ interpolate_cpv <- function(beginning, end, logscale = FALSE, round = FALSE) {
 #' # for 100 full budget evaluations (100 * 2^100)
 #' oi <- OptimInstanceSingleCrit$new(objective,
 #'   search_space = search_space,
-#'   terminator = trm("budget", budget = 100 * 2^10)
+#'   terminator = trm("budget", budget = 10 * 2^10)
 #' )
 #'
 #' # smashy is designed with parallel evaluation in mind. It is
@@ -418,7 +418,7 @@ configure_smashy <- function(search_space, budget_log_step, mu,
 #' # for 100 full budget evaluations (100 * 2^100)
 #' oi <- OptimInstanceSingleCrit$new(objective,
 #'   search_space = search_space,
-#'   terminator = trm("budget", budget = 100 * 2^10)
+#'   terminator = trm("budget", budget = 10 * 2^10)
 #' )
 #'
 #' hb = smashy_as_hyperband(search_space)
@@ -504,7 +504,7 @@ smashy_as_hyperband <- function(search_space, eta = 3, budget_is_logscale = FALS
 #' # for 100 full budget evaluations (100 * 2^100)
 #' oi <- OptimInstanceSingleCrit$new(objective,
 #'   search_space = search_space,
-#'   terminator = trm("budget", budget = 100 * 2^10)
+#'   terminator = trm("budget", budget = 10 * 2^10)
 #' )
 #'
 #' bohb = smashy_as_bohb(search_space)
