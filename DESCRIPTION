@@ -25,7 +25,6 @@ Imports:
   mlr3,
   kknn,
   ranger,
-  np,
   lgr
 Suggests:
   tinytest,

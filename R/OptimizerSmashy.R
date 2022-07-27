@@ -26,13 +26,7 @@
 #' The number of fidelity steps can be determined through the `fidelity_steps` configuration parameter, or can be determined when a
 #' [`TerminatorGenerations`] is used to determine the number of fidelity refinements that are being performed. For this, the  [`OptimInstance`][bbotk::OptimInstance]
 #' being optimized must contain a [`TerminatorGenerations`], either directly (`inst$terminator`), or indirectly through a
-#' [`bbotk::TerminatorCombo`] with `$any` set to `TRUE` (recursive [`TerminatorCombo`][bbotk::TerminatorCombo] may also be used). When `fidelity_steps` is `0`,
-#' the number of generations is determined from the given [`Terminator`][bbotk::Terminator] object and the number of fidelity refinements
-#' is planned according to this number. Other terminators may be present in a [`TerminatorCombo`][bbotk::TerminatorCombo] that may
-#' lead to finishing the tuning process earlier.
-#'
-#' It is possible to continue optimization runs that quit early due to other terminators. It is not recommended to change `fidelity_steps` (or the number of generations
-#' when `fidelity_steps` is 0) between run continuations, however, unless the fidelity bounds are also adjusted, since the continuation would then have a decrease in fidelity.
+#' [`bbotk::TerminatorCombo`] with `$any` set to `TRUE` (recursive [`TerminatorCombo`][bbotk::TerminatorCombo] may also be used).
 #'
 #' @section Configuration Parameters:
 #' `OptimizerSmashy`'s configuration parameters are the hyperparameters of the [`Filtor`] given to the `filtor` construction argument, as well as:
@@ -47,8 +41,7 @@
 #'   This is equivalent to the `initializer` parameter of [`mies_init_population()`], see there for more information. Initialized to
 #'   [`generate_design_random()`][paradox::generate_design_random].
 #' * `fidelity_steps` :: `integer(1)`\cr
-#'   Number of fidelity steps. When it is 0, the number is determined from the [`OptimInstance`][bbotk::OptimInstance]'s [`Terminator`][bbotk::Terminator]. See the
-#'   section **Fidelity Steps** for more details. Initialized to 0.
+#'   Number of fidelity steps, must be at least 1.
 #' * `synchronize_batches` :: `logical(1)`\cr
 #'   Whether to use synchronized batches, as opposed to "Hyperband"-like successive halfing. Initialized to `TRUE`.
 #' * `filter_with_max_budget` :: `logical(1)`\cr
@@ -109,7 +102,7 @@
 #' # to the surrogate model, are used.
 #' smashy_opt <- opt("smashy", ftr("surprog",
 #'     surrogate_learner = mlr3::lrn("regr.ranger"),
-#'     filter.pool_factor = 10),
+#'     filter.pool_factor = 10), fidelity_steps = 10,
 #'   mu = 30, survival_fraction = 2/3
 #' )
 #' # smashy_opt$optimize performs Smashy optimization and returns the optimum
@@ -145,7 +138,7 @@
 #' # use ftr("maybe") for random interleaving: only 50% of proposed points are filtered.
 #' smashy_tune <- tnr("smashy", ftr("maybe", p = 0.5, filtor = ftr("surprog",
 #'     surrogate_learner = lrn("regr.ranger"),
-#'     filter.pool_factor = 10)),
+#'     filter.pool_factor = 10)), fidelity_steps = 10,
 #'   mu = 20, survival_fraction = 0.5
 #' )
 #' # smashy_tune$optimize performs Smashy optimization and returns the optimum
@@ -164,13 +157,13 @@ OptimizerSmashy = R6Class("OptimizerSmashy", inherit = Optimizer,
           mu = p_int(1, tags = "required"),
           survival_fraction = p_dbl(0, 1, tags = "required"),
           sampling = p_uty(custom_check = function(x) check_function(x, args = c("param_set", "n")), tags = c("init", "required")),
-          fidelity_steps = p_int(0, tags = "required"),
+          fidelity_steps = p_int(1, tags = "required"),
           synchronize_batches = p_lgl(tags = "required"),
           filter_with_max_budget = p_lgl(tags = "required")),
         list(
           additional_component_sampler = p_uty(custom_check = function(x) if (is.null(x)) TRUE else check_r6(x, "Sampler")))
       ))
-      param_set$values = list(mu = 2, survival_fraction = 0.5, sampling = paradox::generate_design_random, fidelity_steps = 0, synchronize_batches = TRUE, filter_with_max_budget = FALSE)
+      param_set$values = list(mu = 2, survival_fraction = 0.5, sampling = paradox::generate_design_random, synchronize_batches = TRUE, filter_with_max_budget = FALSE)
 
       private$.own_param_set = param_set
 
@@ -247,21 +240,7 @@ OptimizerSmashy = R6Class("OptimizerSmashy", inherit = Optimizer,
         length(budget_id), str_collapse(budget_id))
 
       stages = params$fidelity_steps
-      if (stages == 0) {
-        if (params$synchronize_batches) {
-          # simple, synchronized evaluation: only one "bracket", so terminate after that
-          stages = terminator_get_stages(inst$terminator)
-        } else {
-          # hyperband-like schedule: there will be brackets of size `stages`, `stages - 1`, ... 1
-          # We want the terminator to make at least one full round of "hyperband", so we set the `generation`
-          # variable such that `stages * (stages + 1) / 2 <= <terminator stages>`
-          stages = (sqrt(1 + 8 * terminator_get_stages(inst$terminato)) - 1) / 2
-        }
-      }
 
-      if (!is.finite(stages)) {
-        stop("When fidelity_steps is 0, then the given OptimizationInstance must have a TerminatorStages, or a TerminatorCombo with 'any = TRUE' containing at least one TerminatorStages (possibly recursively).")
-      }
       if (stages < 1) {
         stopf("At least one generation must be evaluated (at full fidelity), but terminator had %s stages.", stages)
       }

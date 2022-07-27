@@ -33,13 +33,7 @@ for progressive surrogate model filtering. \code{\link{FiltorMaybe}} can be used
 The number of fidelity steps can be determined through the \code{fidelity_steps} configuration parameter, or can be determined when a
 \code{\link{TerminatorGenerations}} is used to determine the number of fidelity refinements that are being performed. For this, the  \code{\link[bbotk:OptimInstance]{OptimInstance}}
 being optimized must contain a \code{\link{TerminatorGenerations}}, either directly (\code{inst$terminator}), or indirectly through a
-\code{\link[bbotk:mlr_terminators_combo]{bbotk::TerminatorCombo}} with \verb{$any} set to \code{TRUE} (recursive \code{\link[bbotk:mlr_terminators_combo]{TerminatorCombo}} may also be used). When \code{fidelity_steps} is \code{0},
-the number of generations is determined from the given \code{\link[bbotk:Terminator]{Terminator}} object and the number of fidelity refinements
-is planned according to this number. Other terminators may be present in a \code{\link[bbotk:mlr_terminators_combo]{TerminatorCombo}} that may
-lead to finishing the tuning process earlier.
-
-It is possible to continue optimization runs that quit early due to other terminators. It is not recommended to change \code{fidelity_steps} (or the number of generations
-when \code{fidelity_steps} is 0) between run continuations, however, unless the fidelity bounds are also adjusted, since the continuation would then have a decrease in fidelity.
+\code{\link[bbotk:mlr_terminators_combo]{bbotk::TerminatorCombo}} with \verb{$any} set to \code{TRUE} (recursive \code{\link[bbotk:mlr_terminators_combo]{TerminatorCombo}} may also be used).
 }
 
 \section{Configuration Parameters}{
@@ -56,8 +50,7 @@ arguments \code{param_set} and \code{n} and function like \code{\link[paradox:ge
 This is equivalent to the \code{initializer} parameter of \code{\link[=mies_init_population]{mies_init_population()}}, see there for more information. Initialized to
 \code{\link[paradox:generate_design_random]{generate_design_random()}}.
 \item \code{fidelity_steps} :: \code{integer(1)}\cr
-Number of fidelity steps. When it is 0, the number is determined from the \code{\link[bbotk:OptimInstance]{OptimInstance}}'s \code{\link[bbotk:Terminator]{Terminator}}. See the
-section \strong{Fidelity Steps} for more details. Initialized to 0.
+Number of fidelity steps, must be at least 1.
 \item \code{synchronize_batches} :: \code{logical(1)}\cr
 Whether to use synchronized batches, as opposed to "Hyperband"-like successive halfing. Initialized to \code{TRUE}.
 \item \code{filter_with_max_budget} :: \code{logical(1)}\cr
@@ -109,7 +102,7 @@ library("mlr3learners")
 # to the surrogate model, are used.
 smashy_opt <- opt("smashy", ftr("surprog",
     surrogate_learner = mlr3::lrn("regr.ranger"),
-    filter.pool_factor = 10),
+    filter.pool_factor = 10), fidelity_steps = 10,
   mu = 30, survival_fraction = 2/3
 )
 # smashy_opt$optimize performs Smashy optimization and returns the optimum
@@ -145,7 +138,7 @@ ti = TuningInstanceSingleCrit$new(
 # use ftr("maybe") for random interleaving: only 50\% of proposed points are filtered.
 smashy_tune <- tnr("smashy", ftr("maybe", p = 0.5, filtor = ftr("surprog",
     surrogate_learner = lrn("regr.ranger"),
-    filter.pool_factor = 10)),
+    filter.pool_factor = 10)), fidelity_steps = 10,
   mu = 20, survival_fraction = 0.5
 )
 # smashy_tune$optimize performs Smashy optimization and returns the optimum
