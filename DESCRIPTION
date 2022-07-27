@@ -24,13 +24,13 @@ Imports:
   mlr3pipelines,
   mlr3,
   kknn,
+  ranger,
+  np,
   lgr
 Suggests:
   tinytest,
   mlr3tuning,
-  ranger,
   xgboost,
-  np,
   rpart
 Remotes:
   mlr-org/paradox@expression_params
