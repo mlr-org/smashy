@@ -86,7 +86,7 @@ Filtor = R6Class("Filtor",
     .supported = NULL,
     .operate = function(values, known_values, fitnesses, n_filter, context) {
 
-      if (getOption("miesmuschel.testing")) private$.primed_ps$assert_dt(known_values)
+      if (getOption("smashy.testing")) private$.primed_ps$assert_dt(known_values)
       assert_names(colnames(known_values), permutation.of = private$.primed_ps$ids())
       if (!is.data.table(known_values)) {
         # don't change input by reference

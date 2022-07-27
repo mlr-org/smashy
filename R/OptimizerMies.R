@@ -31,7 +31,7 @@
 #' Other terminators may, however, end the optimization process at any time.
 #'
 #' @section Multi-Fidelity:
-#' `miesmuschel` provides a simple multi-fidelity optimization mechanism that allows increasing fidelity both by generation
+#' `smashy` provides a simple multi-fidelity optimization mechanism that allows increasing fidelity both by generation
 #' number and survival status. When `multi_fidelity` is `TRUE`, then one search space component of the [`OptimInstance`][bbotk::OptimInstance]
 #' must have the `"budget"` tag, which is then optimized as the "budget" component. This means that the value of this component is
 #' determined by the `fidelity_schedule` configuration parameter, which must contain a `data.frame` with columns `"generation"`, `"budget_new"` and
@@ -290,7 +290,7 @@ OptimizerMies = R6Class("OptimizerMies", inherit = Optimizer,
         param_set = self$param_set,  # essentially a nop, since at this point we already set private$.param_set, but we can't give NULL here.
         param_classes = Reduce(intersect, map(param_class_determinants, "param_classes")),
         properties = c("dependencies", Reduce(intersect, map(properties_determinants, "supported"))),
-        packages = "miesmuschel"
+        packages = "smashy"
       )
     }
   ),

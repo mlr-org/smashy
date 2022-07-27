@@ -73,7 +73,7 @@ LearnerDensityNP = R6Class("LearnerDensityNP", inherit = LearnerDensity,
         packages = "np",
         param_set = param_set,
         properties = "sample",
-        man = "miesmuschel::mlr_learners_density.np"
+        man = "smashy::mlr_learners_density.np"
       )
     }
   ),

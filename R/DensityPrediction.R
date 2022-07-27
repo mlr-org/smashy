@@ -26,7 +26,7 @@ PredictionDensity = R6Class("PredictionDensity", inherit = mlr3::Prediction,
         self$data = mlr3::check_prediction_data(self$data)
       }
       self$task_type = "density"
-      self$man = "miesmuschel::PredictionDensity"
+      self$man = "smashy::PredictionDensity"
       self$predict_types = "prob"
     }
   ),

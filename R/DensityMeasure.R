@@ -34,7 +34,7 @@ MeasureDensity = R6Class("MeasureDensity", inherit = mlr3::Measure, cloneable = 
 MeasureDensityLogloss = R6Class("MeasureDensityLogloss", inherit = MeasureDensity,
   public = list(
     initialize = function() {
-      super$initialize(id = "density.logloss", range = c(-Inf, Inf), minimize = TRUE, man = "miesmuschel::mlr_measures_density.logloss")
+      super$initialize(id = "density.logloss", range = c(-Inf, Inf), minimize = TRUE, man = "smashy::mlr_measures_density.logloss")
     }
   ),
   private = list(

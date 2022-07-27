@@ -34,7 +34,7 @@ SamplerKD = R6Class("SamplerKD", inherit = Sampler,
         budget_id = character(0)
       }
 
-      if (getOption("miesmuschel.testing")) param_set$assert_dt(task$data(cols = setdiff(task$feature_names, budget_id))[, lapply(.SD, function(x) if (is.factor(x)) as.character(x) else x)])
+      if (getOption("smashy.testing")) param_set$assert_dt(task$data(cols = setdiff(task$feature_names, budget_id))[, lapply(.SD, function(x) if (is.factor(x)) as.character(x) else x)])
 
 
 

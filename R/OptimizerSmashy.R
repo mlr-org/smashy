@@ -184,7 +184,7 @@ OptimizerSmashy = R6Class("OptimizerSmashy", inherit = Optimizer,
         id = "smashy",
         param_set = self$param_set, param_classes = private$.filtor$param_classes,
         properties = c(if (can_dependencies) "dependencies", c("single-crit", "multi-crit")),
-        packages = "miesmuschel"  # TODO: packages from filtor, this is in a different branch currently
+        packages = "smashy"  # TODO: packages from filtor, this is in a different branch currently
       )
     }
   ),

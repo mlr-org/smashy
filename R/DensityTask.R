@@ -70,7 +70,7 @@ NULL
 
 load_faithful = function(id = "faithful") {
   ts = TaskDensity$new(id, mlr3::as_data_backend(load_dataset("faithful", "datasets")))
-  ts$hash = ts$man = "miesmuschel::mlr_tasks_faithful"
+  ts$hash = ts$man = "smashy::mlr_tasks_faithful"
   ts
 }
 

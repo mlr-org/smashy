@@ -68,7 +68,7 @@ mut = function(.key, ...) {
 #' @rdname mut
 #' @export
 muts = function(.keys, ...) {
-  miesmuschel_dictionary_mget(dict_mutators, .keys, ...)
+  smashy_dictionary_mget(dict_mutators, .keys, ...)
 }
 
 #' @rdname mut
@@ -80,7 +80,7 @@ rec = function(.key, ...) {
 #' @rdname mut
 #' @export
 recs = function(.key, ...) {
-  miesmuschel_dictionary_mget(dict_recombinators, .key, ...)
+  smashy_dictionary_mget(dict_recombinators, .key, ...)
 }
 
 #' @rdname mut
@@ -92,7 +92,7 @@ sel = function(.key, ...) {
 #' @rdname mut
 #' @export
 sels = function(.key, ...) {
-  miesmuschel_dictionary_mget(dict_selectors, .key, ...)
+  smashy_dictionary_mget(dict_selectors, .key, ...)
 }
 
 #' @rdname mut
@@ -104,7 +104,7 @@ scl = function(.key, ...) {
 #' @rdname mut
 #' @export
 scls = function(.key, ...) {
-  miesmuschel_dictionary_mget(dict_scalors, .key, ...)
+  smashy_dictionary_mget(dict_scalors, .key, ...)
 }
 
 #' @rdname mut
@@ -116,11 +116,11 @@ ftr = function(.key, ...) {
 #' @rdname mut
 #' @export
 ftrs = function(.key, ...) {
-  miesmuschel_dictionary_mget(dict_filtors, .key, ...)
+  smashy_dictionary_mget(dict_filtors, .key, ...)
 }
 
 
-miesmuschel_dictionary_mget = function(dict, .keys, ...) {
+smashy_dictionary_mget = function(dict, .keys, ...) {
   if (missing(.keys)) {
     return(dict)
   }
