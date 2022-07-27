@@ -102,7 +102,7 @@ jobs:
       - name: Coverage
         if: ${{ matrix.action == 'coverage' }}
         shell: Rscript {0}
-        run: covr::codecov(quiet = FALSE, type = "tests")
+        run: covr::codecov(quiet = FALSE, type = "examples")
       - name: install
         if: ${{ matrix.action != 'coverage' && matrix.os == 'ubuntu-20.04' && matrix.r == 'release' }}
         working-directory: ..
