@@ -35,7 +35,7 @@ Other terminators may, however, end the optimization process at any time.
 
 \section{Multi-Fidelity}{
 
-\code{miesmuschel} provides a simple multi-fidelity optimization mechanism that allows increasing fidelity both by generation
+\code{smashy} provides a simple multi-fidelity optimization mechanism that allows increasing fidelity both by generation
 number and survival status. When \code{multi_fidelity} is \code{TRUE}, then one search space component of the \code{\link[bbotk:OptimInstance]{OptimInstance}}
 must have the \code{"budget"} tag, which is then optimized as the "budget" component. This means that the value of this component is
 determined by the \code{fidelity_schedule} configuration parameter, which must contain a \code{data.frame} with columns \code{"generation"}, \code{"budget_new"} and

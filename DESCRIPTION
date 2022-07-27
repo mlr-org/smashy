@@ -23,6 +23,7 @@ Imports:
   mlr3learners,
   mlr3pipelines,
   mlr3,
+  kknn,
   lgr
 Suggests:
   tinytest,
