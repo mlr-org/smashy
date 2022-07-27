@@ -66,7 +66,7 @@ PipeOpDensitySplit = R6Class("PipeOpDensitySplit",
 
       if (task$nrow <= pv$min_size) stopf("Task must have more than min_size (%s) samples, but has %s.", pv$min_size, task$nrow)
 
-      target = task$data(cols = task$target_names)
+      target = task$data(cols = task$target_names)[[1]]
       rows = task$row_ids
 
       n_top = max(round(pv$alpha * task$nrow), pv$min_size)
