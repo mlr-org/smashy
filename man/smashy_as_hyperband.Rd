@@ -62,7 +62,7 @@ search_space = objective$domain$search_space(list(
 # for 100 full budget evaluations (100 * 2^100)
 oi <- OptimInstanceSingleCrit$new(objective,
   search_space = search_space,
-  terminator = trm("budget", budget = 100 * 2^10)
+  terminator = trm("budget", budget = 10 * 2^10)
 )
 
 hb = smashy_as_hyperband(search_space)
