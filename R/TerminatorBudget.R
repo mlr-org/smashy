@@ -59,7 +59,7 @@ TerminatorBudget = R6Class("TerminatorBudget", inherit = Terminator,
       budget_id = archive$search_space$ids(tags = "budget")
       if (length(budget_id) != 1) stopf("Need exactly one budget parameter, but found %s: %s",
         length(budget_id), str_collapse(budget_id))
-      params$aggregate(archive$data[[budget_id]]) >= params$budget
+      params$aggregate(map_dbl(archive$data$x_domain, budget_id)) >= params$budget
     }
   ),
   private = list(
