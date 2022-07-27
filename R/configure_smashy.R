@@ -518,7 +518,7 @@ smashy_as_bohb <- function(search_space, eta = 3, rho = 1 / 3, ns = 64, budget_i
   trafo = if (budget_is_logscale) identity else log
   fidelity_steps = floor((trafo(search_space$upper[budget_param]) - trafo(search_space$lower[budget_param])) / log(eta))
 
-  configure_smashy(
+  configure_smashy(search_space,
     budget_log_step = log(eta),
     survival_fraction = 1 / eta,
     mu = eta ^ fidelity_steps,
