@@ -56,7 +56,7 @@ RecombinatorSimulatedBinaryCrossover = R6Class("RecombinatorSimulatedBinaryCross
     }
   ),
   private = list(
-    .recombine = function(values) {
+    .recombine = function(values, context) {
       n_components = NCOL(values)
       params = self$param_set$get_values()
       p = params$p
