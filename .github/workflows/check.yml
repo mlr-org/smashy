@@ -98,7 +98,7 @@ jobs:
       - name: Check
         if: ${{ matrix.action != 'coverage' }}
         working-directory: ..
-        run: 'R CMD check --as-cran --run-donttest *.tar.gz'
+        run: 'R CMD check --as-cran --no-tests *.tar.gz'
       - name: Coverage
         if: ${{ matrix.action == 'coverage' }}
         shell: Rscript {0}

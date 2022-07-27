@@ -5,6 +5,10 @@
 #' @import R6
 #' @import data.table
 #' @import mlr3pipelines
+#' @import stats
+#' @import utils
+#' @import mlr3
+#' @import mlr3learners
 #'
 #' @description
 #'

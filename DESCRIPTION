@@ -22,13 +22,14 @@ Imports:
   matrixStats,
   mlr3learners,
   mlr3pipelines,
+  mlr3,
   lgr
 Suggests:
   tinytest,
   mlr3tuning,
-  mlr3,
   ranger,
   xgboost,
+  np,
   rpart
 RoxygenNote: 7.2.0
 Collate: 

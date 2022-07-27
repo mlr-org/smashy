@@ -22,6 +22,17 @@ Eta-parameter of BOHB:
 Factor of budget increase and at the same time, one over fraction of configurations that survive, for
 each batch evaluation. Default 3.}
 
+\item{rho}{(\code{numeric(1)})\cr
+Rho-parameter of BOHB:
+fraction of configurations sampled randomly without the aid of the surrogate model.\cr
+Note that this implementation differs from the implementation by Falkner et al. (2018),
+since the kernel density sampler of BOHB is used even for the randomly interleaved configurations
+here, whereas Falkner et al. (2018) samples these points uniformly at random.}
+
+\item{ns}{(\code{integer(1)})\cr
+Surrogate random search rate: How many randomly sampled configurations to evaluate on the surrogate model
+to choose a single configuration to evaluate on the true objective function.}
+
 \item{budget_is_logscale}{(\code{logical(1)})\cr
 Whether the component of \code{search_space} tagged as \code{"budget"} is in log-scale (\code{TRUE}) or not (\code{FALSE}).
 When \code{budget_is_logscale} is given as \code{TRUE}, then evaluations are done with linear steps of \code{budget_log_step}.
@@ -31,13 +42,6 @@ Otherwise, exponential steps of \code{exp(budget_log_step)} are performed. Defau
 One of \code{"Optimizer"} or \code{"Tuner"}. What class to return: An \code{\link[bbotk:Optimizer]{Optimizer}} for
 optimizing \code{\link[bbotk:OptimInstanceSingleCrit]{OptimInstanceSingleCrit}} objects, or a
 \code{\link[mlr3tuning:Tuner]{Tuner}} for tuning \code{\link[mlr3:Learner]{mlr3::Learner}}s. Defaults to \code{"Optimizer"}.}
-
-\item{`rho`}{(\code{numeric(1)})\cr
-Rho-parameter of BOHB:
-fraction of configurations sampled randomly without the aid of the surrogate model.\cr
-Note that this implementation differs from the implementation by Falkner et al. (2018),
-since the kernel density sampler of BOHB is used even for the randomly interleaved configurations
-here, whereas Falkner et al. (2018) samples these points uniformly at random.}
 }
 \value{
 \code{\link{OptimizerSmashy}} or \code{\link{TunerSmashy}}, depending on the \code{type} argument: The configured \emph{Smashy} optimizer.

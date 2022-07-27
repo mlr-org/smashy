@@ -3,6 +3,7 @@
 prepare_learnerlist = function() {
 # Imputation pipeline; needs to be robust against NAs that only occur during prediction
 imputepl <- po("imputeoor", offset = 1, multiplier = 10) %>>% po("fixfactors") %>>% po("imputesample")
+#library("mlr3learners")
 
 # learners used in the paper
 learnerlist <- list(
@@ -88,7 +89,7 @@ interpolate_cpv <- function(beginning, end, logscale = FALSE, round = FALSE) {
 
 # --- objective construction
 
-#' @title Configure Full Smashy Optimizer
+#' @title Configure Full Smashy Optimizer.
 #'
 #' @description
 #' Create a [`OptimizerSmashy`] (or [`TunerSmashy`]) object with extended functionality from
@@ -98,7 +99,7 @@ interpolate_cpv <- function(beginning, end, logscale = FALSE, round = FALSE) {
 #' can be difficult, hence this helper function. `configure_smashy()` should be used
 #' when the extended functionality is desired.
 #'
-#' @section Simulated Annealing.
+#' @section Simulated Annealing:
 #' For the function arguments `filter_factor_first`, `filter_factor_last`,
 #' `select_per_tournament`, and `random_interleave_fraction`, it is possible to also give
 #' corresponding `*.end` arguments. 
@@ -284,7 +285,7 @@ configure_smashy <- function(search_space, budget_log_step, mu,
         x <- prevtrafo(x, param_set)
         x[[budget_param]] <- min(floor(exp(x[[budget_param]])), budgetupper)
         x
-      }, prevtrafo, budget_param, proto_dt, budgetupper)
+      }, prevtrafo, budget_param, budgetupper)
     } else {
       search_space$params[[budget_param]]$lower = log(search_space$params[[budget_param]]$lower)
       search_space$params[[budget_param]]$upper = log(search_space$params[[budget_param]]$upper)
@@ -292,7 +293,7 @@ configure_smashy <- function(search_space, budget_log_step, mu,
         x <- prevtrafo(x)
         x[[budget_param]] <- exp(x[[budget_param]])
         x
-      }, prevtrafo, budget_param, proto_dt)
+      }, prevtrafo, budget_param)
 
     }
   }
@@ -460,12 +461,15 @@ smashy_as_hyperband <- function(search_space, eta = 3, budget_is_logscale = FALS
 #'   Eta-parameter of BOHB:
 #'   Factor of budget increase and at the same time, one over fraction of configurations that survive, for
 #'   each batch evaluation. Default 3.
-#' @param `rho` (`numeric(1)`)\cr
+#' @param rho (`numeric(1)`)\cr
 #'   Rho-parameter of BOHB:
 #'   fraction of configurations sampled randomly without the aid of the surrogate model.\cr
 #'   Note that this implementation differs from the implementation by Falkner et al. (2018),
 #'   since the kernel density sampler of BOHB is used even for the randomly interleaved configurations
 #'   here, whereas Falkner et al. (2018) samples these points uniformly at random.
+#' @param ns (`integer(1)`)\cr
+#'   Surrogate random search rate: How many randomly sampled configurations to evaluate on the surrogate model
+#'   to choose a single configuration to evaluate on the true objective function.
 #' @param budget_is_logscale (`logical(1)`)\cr
 #'   Whether the component of `search_space` tagged as `"budget"` is in log-scale (`TRUE`) or not (`FALSE`).
 #'   When `budget_is_logscale` is given as `TRUE`, then evaluations are done with linear steps of `budget_log_step`.

@@ -103,7 +103,7 @@ print.Scalarizer = function(x, ...) {
 
 #' @export
 scalarizer_linear = function() {
-  make_scalarizer("scalarize_linear", function(fitnesses, weights) {
+  make_scalarizer("scalarizer_linear", function(fitnesses, weights) {
     t(mapply(`%*%`, asplit(fitnesses, 1), weights))
   })
 }
@@ -111,7 +111,7 @@ scalarizer_linear = function() {
 #' @export
 scalarizer_chebyshev = function(rho = 0.05) {
   assert_number(rho)
-  make_scalarizer("scalarize_chebyshev", function(fitnesses, weights) {
+  make_scalarizer("scalarizer_chebyshev", function(fitnesses, weights) {
     t(mapply(function(f, w) {
       apply(w * c(f), 2, min) + rho * f %*% w
     }, asplit(fitnesses, 1), weights))

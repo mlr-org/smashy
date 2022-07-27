@@ -2,7 +2,7 @@
 % Please edit documentation in R/configure_smashy.R
 \name{configure_smashy}
 \alias{configure_smashy}
-\title{Configure Full Smashy Optimizer}
+\title{Configure Full Smashy Optimizer.}
 \usage{
 configure_smashy(
   search_space,
@@ -131,6 +131,17 @@ model filtering or change of filter configuration over the course of optimizatio
 can be difficult, hence this helper function. \code{configure_smashy()} should be used
 when the extended functionality is desired.
 }
+\section{Simulated Annealing}{
+
+For the function arguments \code{filter_factor_first}, \code{filter_factor_last},
+\code{select_per_tournament}, and \code{random_interleave_fraction}, it is possible to also give
+corresponding \verb{*.end} arguments.
+When the corresponding \verb{*.end} argument differs from the given value, then the effective
+value changes over the course of optimization, starting at the given value and progressing
+geometrically (for \code{filter_factor_first}, \code{filter_factor_last}, and \code{select_per_tournament}) or
+linearly (for \code{random_interleave_fraction}) towards the \verb{*.end}-value at the end.
+}
+
 \examples{
 library("bbotk")
 
