@@ -181,6 +181,7 @@ OptimizerSmashy = R6Class("OptimizerSmashy", inherit = Optimizer,
       can_dependencies = TRUE  # TODO filtor needs to announce this
 
       super$initialize(
+        id = "smashy",
         param_set = self$param_set, param_classes = private$.filtor$param_classes,
         properties = c(if (can_dependencies) "dependencies", c("single-crit", "multi-crit")),
         packages = "miesmuschel"  # TODO: packages from filtor, this is in a different branch currently
