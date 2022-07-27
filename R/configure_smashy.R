@@ -203,7 +203,7 @@ interpolate_cpv <- function(beginning, end, logscale = FALSE, round = FALSE) {
 #' ))
 #'
 #' # Get a new OptimInstance. Here we determine that the optimizatoin goes
-#' # for 100 full budget evaluations (100 * 2^100)
+#' # for 10 full budget evaluations (10 * 2^100)
 #' oi <- OptimInstanceSingleCrit$new(objective,
 #'   search_space = search_space,
 #'   terminator = trm("budget", budget = 10 * 2^10)
@@ -415,7 +415,7 @@ configure_smashy <- function(search_space, budget_log_step, mu,
 #' ))
 #'
 #' # Get a new OptimInstance. Here we determine that the optimizatoin goes
-#' # for 100 full budget evaluations (100 * 2^100)
+#' # for 10 full budget evaluations (10 * 2^100)
 #' oi <- OptimInstanceSingleCrit$new(objective,
 #'   search_space = search_space,
 #'   terminator = trm("budget", budget = 10 * 2^10)
@@ -501,7 +501,7 @@ smashy_as_hyperband <- function(search_space, eta = 3, budget_is_logscale = FALS
 #' ))
 #'
 #' # Get a new OptimInstance. Here we determine that the optimizatoin goes
-#' # for 100 full budget evaluations (100 * 2^100)
+#' # for 10 full budget evaluations (10 * 2^100)
 #' oi <- OptimInstanceSingleCrit$new(objective,
 #'   search_space = search_space,
 #'   terminator = trm("budget", budget = 10 * 2^10)
