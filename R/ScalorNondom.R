@@ -64,7 +64,7 @@ ScalorNondom = R6Class("ScalorNondom",
           fronts = lapply(split(as.data.frame(fitnesses), ranked), as.matrix)
           subrank = switch(params$tiebreak,
             crowdingdist = lapply(fronts, function(x) rank(dist_crowding(x)) / (nrow(x) + 1)),
-            hvcontrib = lapply(fonts, function(x) rank(domhv_contribution(x, nadir = params$nadir, epsilon = epsilon))),
+            hvcontrib = lapply(fronts, function(x) rank(domhv_contribution(x, nadir = params$nadir, epsilon = epsilon))),
           )
         }
         for (i in seq_along(subrank)) {

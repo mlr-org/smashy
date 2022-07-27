@@ -693,7 +693,7 @@ mies_prime_operators = function(search_space, mutators = list(), recombinators =
 #' oi$archive
 #'
 #' @export
-mies_init_population = function(inst, mu, initializer = generate_design_random, fidelity_schedule = NULL, budget_id = NULL, additional_component_sampler = NULL) {
+mies_init_population = function(inst, mu, initializer = paradox::generate_design_random, fidelity_schedule = NULL, budget_id = NULL, additional_component_sampler = NULL) {
   assert_optim_instance(inst)
 
   assert_int(mu, lower = 0, tol = 1e-100)

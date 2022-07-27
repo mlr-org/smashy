@@ -269,7 +269,7 @@ OptimizerMies = R6Class("OptimizerMies", inherit = Optimizer,
         self$parent_selector$param_set, self$survival_selector$param_set), if (!is.null(elite_selector)) alist(self$elite_selector$param_set))
 
       self$param_set$values = insert_named(self$param_set$values, c(
-        list(lambda = 10, mu = 1, initializer = generate_design_random, survival_strategy = "plus"),
+        list(lambda = 10, mu = 1, initializer = paradox::generate_design_random, survival_strategy = "plus"),
         if (multi_fidelity) list(
           fidelity_schedule = data.frame(generation = 1, budget_new = 1, budget_survivors = 1),
           fidelity_generation_lookahead = TRUE, fidelity_current_gen_only = FALSE, fidelity_monotonic = TRUE)

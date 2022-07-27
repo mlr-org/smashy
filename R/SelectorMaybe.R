@@ -215,9 +215,9 @@ SelectorMaybe = R6Class("SelectorMaybe",
         selector_not_in = seq_len(nrow(values) - n_selector_in) + n_selector_in
       }
 
-      if (selector_out == n_select) {
+      if (n_selector_out == n_select) {
         selector_in[private$.wrapped$operate(values[selector_in], fitnesses[selector_in, , drop = FALSE], n_select, context = context)]
-      } else if (selector_out == 0) {
+      } else if (n_selector_out == 0) {
         selector_not_in[private$.wrapped_not$operate(values[selector_not_in], fitnesses[selector_not_in, , drop = FALSE], n_select, context = context)]
       } else {
         # if we get here, then both operators need to work.

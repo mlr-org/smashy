@@ -63,7 +63,7 @@ PipeOpStratify = R6Class("PipeOpStratify",
   public = list(
     initialize = function(id = "stratify", param_vals = list()) {
       param_set = ps(
-        stratify_feature = p_uty(tags = c("train", "predict", "required"), custom_check = crate(function(x) check_string(x))),
+        stratify_feature = p_uty(tags = c("train", "predict", "required"), custom_check = crate(function(x) checkmate::check_string(x))),
         min_size = p_int(1, tags = c("train", "required")),
         predict_choice = p_fct(c("exact", "exact_or_greater", "exact_or_less", "nearest"), tags = c("predict", "required"))
       )

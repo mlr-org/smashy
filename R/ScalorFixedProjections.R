@@ -64,7 +64,7 @@ ScalorFixedProjection = R6Class("ScalorFixedProjection",
       scalarization = self$param_set$get_values(context = context)$scalarization
 
       weights = values[[private$.weight_id]]
-      lapply(weights, assert_matrix, mode = "numeric", nrows = ncol(fitnesses), ncols = ncols(weights[[1]]))  # scalor asserts that values has at least one row
+      lapply(weights, assert_matrix, mode = "numeric", nrows = ncol(fitnesses), ncols = ncol(weights[[1]]))  # scalor asserts that values has at least one row
 
       scaled = scalarization(fitnesses, weights)
 

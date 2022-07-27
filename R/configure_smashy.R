@@ -58,8 +58,8 @@ learnerlist
 # --- bohb-like sampling
 generate_design_bohb = ContextPV(function(inst) function(param_set, n) {
   target = inst$archive$codomain$ids()
-  if (!nrow(inst$archive$data)) return(generate_design_random(param_set, n))
-  task = TaskRegr$new("archive", inst$archive$data[, c(inst$archive$search_space$ids(), target), with = FALSE], target = target)
+  if (!nrow(inst$archive$data)) return(paradox::generate_design_random(param_set, n))
+  task = mlr3::TaskRegr$new("archive", inst$archive$data[, c(inst$archive$search_space$ids(), target), with = FALSE], target = target)
   sampler = SamplerKD$new(param_set, task, inst$archive$codomain$tags[[1]] == "minimize", alpha = .15, min_points_in_model = 0, bandwidth_factor = 3, min_bandwidth = 1e-3)
   sampler$sample(n)
 })

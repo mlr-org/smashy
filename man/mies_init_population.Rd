@@ -7,7 +7,7 @@
 mies_init_population(
   inst,
   mu,
-  initializer = generate_design_random,
+  initializer = paradox::generate_design_random,
   fidelity_schedule = NULL,
   budget_id = NULL,
   additional_component_sampler = NULL

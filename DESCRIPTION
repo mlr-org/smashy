@@ -31,6 +31,8 @@ Suggests:
   xgboost,
   np,
   rpart
+Remotes:
+  mlr-org/paradox@expression_params
 RoxygenNote: 7.2.0
 Collate: 
     'DensityLearner.R'

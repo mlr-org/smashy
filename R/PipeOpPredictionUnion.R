@@ -74,7 +74,7 @@ PipeOpPredictionUnion = R6Class("PipeOpPredictionUnion",
     initialize = function(innum = 0L, collect_multiplicity = FALSE, id = "predictionunion", param_vals = list()) {
       assert_int(innum, lower = 0L)
 
-      inname = if (innum) rep_suffix("input", innum) else "..."
+      inname = if (innum) sprintf("input_%s", seq_len(innum)) else "..."
       intype = c("NULL", "Prediction")
 
       private$.collect = assert_flag(collect_multiplicity)

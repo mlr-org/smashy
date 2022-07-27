@@ -170,7 +170,7 @@ OptimizerSmashy = R6Class("OptimizerSmashy", inherit = Optimizer,
         list(
           additional_component_sampler = p_uty(custom_check = function(x) if (is.null(x)) TRUE else check_r6(x, "Sampler")))
       ))
-      param_set$values = list(mu = 2, survival_fraction = 0.5, sampling = generate_design_random, fidelity_steps = 0, synchronize_batches = TRUE, filter_with_max_budget = FALSE)
+      param_set$values = list(mu = 2, survival_fraction = 0.5, sampling = paradox::generate_design_random, fidelity_steps = 0, synchronize_batches = TRUE, filter_with_max_budget = FALSE)
 
       private$.own_param_set = param_set
 
