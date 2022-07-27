@@ -59,7 +59,7 @@ search_space = objective$domain$search_space(list(
 ))
 
 # Get a new OptimInstance. Here we determine that the optimizatoin goes
-# for 100 full budget evaluations (100 * 2^100)
+# for 10 full budget evaluations (10 * 2^100)
 oi <- OptimInstanceSingleCrit$new(objective,
   search_space = search_space,
   terminator = trm("budget", budget = 10 * 2^10)
