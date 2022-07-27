@@ -25,8 +25,8 @@ jobs:
     strategy:
       fail-fast: false  # continue runs even when a parallel run failed
       matrix:
-        # run on ubuntu, macos, windows. 20.04 is more recent than ubuntu-latest, currently.
-        os: [macos-latest, windows-latest, ubuntu-20.04]
+        # run on ubuntu, macos. 20.04 is more recent than ubuntu-latest, currently.
+        os: [macos-latest, ubuntu-20.04]
         action: [check]
         r: [release]
         include:
@@ -88,9 +88,6 @@ jobs:
       - name: Document
         shell: Rscript {0}
         run: roxygen2::roxygenise()
-      - if: runner.os == 'windows'
-        name: Remove hypertarget from Latex for Windows
-        run: "sed -i 's/\\\\hypertarget{[^}]*}//g' man/*"
       - name: Build
         if: ${{ matrix.action != 'coverage' }}
         working-directory: ..
