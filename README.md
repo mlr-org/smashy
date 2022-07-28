@@ -68,7 +68,7 @@ smashy$optimize(oi)
 
 ## Getting Help
 
-`smashy` provides optimizers that work with the [bbotk](https://github.com/mlr-org/bbotk) package:
+`smashy` provides optimizers that work with the [bbotk](https://bbotk.mlr-org.com/) package:
 A [`OptimInstanceSingleCrit`](https://bbotk.mlr-org.com/reference/OptimInstanceSingleCrit.html) needs to be defined, which itself needs an [`Objective`](https://bbotk.mlr-org.com/reference/Objective.html) and a [`ParamSet`](https://paradox.mlr-org.com/reference/ParamSet.html) that defines a search space.
 
 `smashy` can also be used for hyperparameter optimization (HPO) of [`mlr3`](https://mlr3.mlr-org.com/) machine learning algorithms:
