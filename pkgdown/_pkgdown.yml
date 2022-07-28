@@ -1,9 +1,5 @@
 url: https://mlr-org.github.io/smashy/
 
-template:
-  bootstrap: 5
-  package: mlr3pkgdowntemplate
-
 development:
   mode: auto
   version_label: default
@@ -33,13 +29,13 @@ reference:
       - smashy
   - title: Pre-Configured Smashy
     contents:
-      - configure_smashy()
-      - smashy_as_bohb()
-      - smashy_as_hyperband()
+      - configure_smashy
+      - smashy_as_bohb
+      - smashy_as_hyperband
   - title: Smashy Main Components
-    desc: Build Your Own Smashy
+    desc: "**Build Your Own Smashy**"
     contents:
-      - OptimizerSmashy TunerSmashy
+      - OptimizerSmashy
   - subtitle: Kernel Density Estimation and TPE
     contents:
       - TaskDensity
@@ -55,8 +51,8 @@ reference:
       - PipeOpStratify
       - SamplerKD
       - mlr_tasks_faithful
-      - as_prediction_density()
-      - as_task_density()
+      - as_prediction_density
+      - as_task_density
   - subtitle: Surrogate Model
     contents:
       - Filtor
@@ -67,25 +63,28 @@ reference:
       - FiltorSurrogateProgressive
       - FiltorSurrogateTournament
   - subtitle: Evaluation Schedules
-      - smashy_evaluation_schedule()
-      - hb_evaluation_schedule()
-      - hb_survivors_info()
-      - hb_bracket_budget()
+    contents:
+      - smashy_evaluation_schedule
+      - hb_evaluation_schedule
+      - hb_survivors_info
+      - hb_bracket_budget
   - title: Terminators
+    contents:
       - TerminatorBudget
       - TerminatorGenerations
-      - terminator_get_generations()
+      - terminator_get_generations
   - title: Utility
+    contents:
       - ParamSetShadow
       - SamplerRandomWeights
-      - repr()
+      - repr
   - title: Miesmuschel
-    desc: Components from the `miesmuschel` package, will be moved there eventually.
+    desc: Components from the `miesmuschel` package, will be moved there and removed from here eventually.
     contents:
-      - OptimizerMies TunerMies
+      - OptimizerMies
   - subtitle: Dictionaries
     contents:
-      - mut() muts() rec() recs() sel() sels() scl() scls() ftr() ftrs()
+      - mut
       - dict_filtors
       - dict_mutators
       - dict_recombinators
@@ -93,21 +92,21 @@ reference:
       - dict_selectors
   - subtitle: MIES Basic Operations
     contents:
-      - mies_evaluate_offspring()
-      - mies_filter_offspring()
-      - mies_generate_offspring()
-      - mies_get_fitnesses()
-      - mies_init_population()
-      - mies_prime_operators()
-      - mies_select_from_archive()
-      - mies_step_fidelity()
-      - mies_survival_comma()
-      - mies_survival_plus()
+      - mies_evaluate_offspring
+      - mies_filter_offspring
+      - mies_generate_offspring
+      - mies_get_fitnesses
+      - mies_init_population
+      - mies_prime_operators
+      - mies_select_from_archive
+      - mies_step_fidelity
+      - mies_survival_comma
+      - mies_survival_plus
   - title: Operators
-    desc: Components from the `miesmuschel` package, will be moved there eventually.
+    desc: Components from the `miesmuschel` package, will be moved there and removed from here eventually.
     contents:
       - MiesOperator
-      - OperatorCombination MutatorCombination RecombinatorCombination
+      - OperatorCombination
   - subtitle: Scalors
     contents:
       - Scalor
@@ -151,7 +150,8 @@ reference:
       - MutatorDiscreteUniform
   - title: Multi-Objective
     desc: Untested, may not work.
-      - dist_crowding()
-      - domhv_contribution()
-      - domhv_improvement()
-      - rank_nondominated()
+    contents:
+      - dist_crowding
+      - domhv_contribution
+      - domhv_improvement
+      - rank_nondominated
