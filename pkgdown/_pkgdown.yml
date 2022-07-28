@@ -1,0 +1,157 @@
+url: https://mlr-org.github.io/smashy/
+
+template:
+  bootstrap: 5
+  package: mlr3pkgdowntemplate
+
+development:
+  mode: auto
+  version_label: default
+  version_tooltip: "Version"
+
+toc:
+  depth: 3
+
+navbar:
+  structure:
+    left: [reference, news]
+    right: [github, mattermost]
+  components:
+    home: ~
+    reference:
+      icon: fa fa-file-alt
+      text: Reference
+      href: reference/index.html
+    mattermost:
+      icon: fa fa-comments
+      href: https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/
+
+
+reference:
+  - title: Package
+    contents:
+      - smashy
+  - title: Pre-Configured Smashy
+    contents:
+      - configure_smashy()
+      - smashy_as_bohb()
+      - smashy_as_hyperband()
+  - title: Smashy Main Components
+    desc: Build Your Own Smashy
+    contents:
+      - OptimizerSmashy TunerSmashy
+  - subtitle: Kernel Density Estimation and TPE
+    contents:
+      - TaskDensity
+      - LearnerDensity
+      - MeasureDensity
+      - PredictionDensity
+      - LearnerDensityFeatureless
+      - LearnerDensityNP
+      - MeasureDensityLogloss
+      - PipeOpDensityRatio
+      - PipeOpDensitySplit
+      - PipeOpPredictionUnion
+      - PipeOpStratify
+      - SamplerKD
+      - mlr_tasks_faithful
+      - as_prediction_density()
+      - as_task_density()
+  - subtitle: Surrogate Model
+    contents:
+      - Filtor
+      - FiltorSurrogate
+      - FiltorMaybe
+      - FiltorNull
+      - FiltorProxy
+      - FiltorSurrogateProgressive
+      - FiltorSurrogateTournament
+  - subtitle: Evaluation Schedules
+      - smashy_evaluation_schedule()
+      - hb_evaluation_schedule()
+      - hb_survivors_info()
+      - hb_bracket_budget()
+  - title: Terminators
+      - TerminatorBudget
+      - TerminatorGenerations
+      - terminator_get_generations()
+  - title: Utility
+      - ParamSetShadow
+      - SamplerRandomWeights
+      - repr()
+  - title: Miesmuschel
+    desc: Components from the `miesmuschel` package, will be moved there eventually.
+    contents:
+      - OptimizerMies TunerMies
+  - subtitle: Dictionaries
+    contents:
+      - mut() muts() rec() recs() sel() sels() scl() scls() ftr() ftrs()
+      - dict_filtors
+      - dict_mutators
+      - dict_recombinators
+      - dict_scalors
+      - dict_selectors
+  - subtitle: MIES Basic Operations
+    contents:
+      - mies_evaluate_offspring()
+      - mies_filter_offspring()
+      - mies_generate_offspring()
+      - mies_get_fitnesses()
+      - mies_init_population()
+      - mies_prime_operators()
+      - mies_select_from_archive()
+      - mies_step_fidelity()
+      - mies_survival_comma()
+      - mies_survival_plus()
+  - title: Operators
+    desc: Components from the `miesmuschel` package, will be moved there eventually.
+    contents:
+      - MiesOperator
+      - OperatorCombination MutatorCombination RecombinatorCombination
+  - subtitle: Scalors
+    contents:
+      - Scalor
+      - ScalorAggregate
+      - ScalorFixedProjection
+      - ScalorProxy
+      - ScalorDomcount
+      - ScalorHypervolume
+      - ScalorNondom
+      - ScalorOne
+      - SelectorMaybe
+  - subtitle: Selectors
+    contents:
+      - Selector
+      - SelectorBest
+      - SelectorNull
+      - SelectorProxy
+      - SelectorRandom
+      - SelectorSequential
+  - subtitle: Recombinators
+    contents:
+      - Recombinator
+      - RecombinatorMaybe
+      - RecombinatorNull
+      - RecombinatorProxy
+      - RecombinatorSimulatedBinaryCrossover
+      - RecombinatorSequential
+      - RecombinatorCrossoverUniform
+  - subtitle: Mutators
+    contents:
+      - Mutator
+      - MutatorDiscrete
+      - MutatorNumeric
+      - MutatorCmpMaybe
+      - MutatorErase
+      - MutatorGauss
+      - MutatorMaybe
+      - MutatorNull
+      - MutatorProxy
+      - MutatorSequential
+      - MutatorDiscreteUniform
+  - title: Multi-Objective
+    desc: Untested, may not work.
+      - dist_crowding()
+      - domhv_contribution()
+      - domhv_improvement()
+      - rank_nondominated()
