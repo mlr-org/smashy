@@ -25,9 +25,9 @@ Imports:
   mlr3,
   kknn,
   ranger,
+  np,
   lgr
 Suggests:
-  np,
   tinytest,
   mlr3tuning,
   xgboost,

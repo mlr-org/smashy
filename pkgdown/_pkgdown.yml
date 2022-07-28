@@ -32,6 +32,7 @@ reference:
       - configure_smashy
       - smashy_as_bohb
       - smashy_as_hyperband
+      - budget_to_logscale
   - title: Smashy Main Components
     desc: "**Build Your Own Smashy**"
     contents:

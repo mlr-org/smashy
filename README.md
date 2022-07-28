@@ -70,11 +70,12 @@ smashy$optimize(oi)
 
 `smashy` provides optimizers that work with the [bbotk](https://bbotk.mlr-org.com/) package:
 A [`OptimInstanceSingleCrit`](https://bbotk.mlr-org.com/reference/OptimInstanceSingleCrit.html) needs to be defined, which itself needs an [`Objective`](https://bbotk.mlr-org.com/reference/Objective.html) and a [`ParamSet`](https://paradox.mlr-org.com/reference/ParamSet.html) that defines a search space.
+The latter is ideally constructed using either [`ps()`](https://paradox.mlr-org.com/reference/ps.html) in combination with [`Domain`](https://paradox.mlr-org.com/reference/Domain.html)-constructors such as [`p_dbl()`, `p_int()`, `p_fct()` etc.](https://paradox.mlr-org.com/reference/Domain.html), or with [`to_tune()`](https://paradox.mlr-org.com/reference/to_tune.html) as shown above.
 
 `smashy` can also be used for hyperparameter optimization (HPO) of [`mlr3`](https://mlr3.mlr-org.com/) machine learning algorithms:
-See the [mlr3book](https://mlr3book.mlr-org.com/04-optimization.html) chapter for an introduction of how HPO works in [`mlr3`].
+See the [mlr3book](https://mlr3book.mlr-org.com/04-optimization.html) chapter for an introduction of how HPO works in [`mlr3`](https://mlr3.mlr-org.com/).
 
-It is easiest to use `smashy`, as in the example above, by using [`configure_smashy()`](https://mlr-org.github.io/smashy/reference/configure_smashy.html) (making sure the budget parameter is in log-scale with [`budget_to_logscale()`](https://mlr-org.github.io/smashy/reference/budget_to_logscale.html) beforehand).
+It is easiest to use `smashy`, as in the example above, by calling [`configure_smashy()`](https://mlr-org.github.io/smashy/reference/configure_smashy.html) (making sure the budget parameter is in log-scale with [`budget_to_logscale()`](https://mlr-org.github.io/smashy/reference/budget_to_logscale.html) beforehand).
 Functions that emulate [Hyperband](https://arxiv.org/abs/1603.06560?context=cs) and [BOHB](https://www.automl.org/blog_bohb/) are also provided: [`smashy_as_hyperband()`](https://mlr-org.github.io/smashy/reference/smashy_as_hyperband.html) and [`smashy_as_bohb()`](https://mlr-org.github.io/smashy/reference/smashy_as_bohb.html). 
 
 You can also see the [reference](https://mlr-org.github.io/smashy/reference/index.html) for other classes and methods, although these are mostly for internal use and not of interest for the typical user.
