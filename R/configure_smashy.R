@@ -89,6 +89,74 @@ interpolate_cpv <- function(beginning, end, logscale = FALSE, round = FALSE) {
 
 # --- objective construction
 
+#' @title Put Budget-Parameter on Logarithmic Scale
+#'
+#' @description
+#' Set the search space component that is tagged as `"budget"` to log-scale.
+#'
+#' Smashy operates on a log-scale internally, so the budget of the search space
+#' must also be on a log-scale, and should be transformed (through exponentiation)
+#' by the `$trafo()` function of the [`ParamSet`][paradox::ParamSet].
+#'
+#' `budget_to_logscale()` does this automatically: It takes a [`ParamSet`][paradox::ParamSet]
+#' with unscaled budget (e.g. number of deep learning epochs, or timeout), and returns a
+#' [`ParamSet`][paradox::ParamSet] where this configuration parameter is replaced by another
+#' configuration parameter with `lower` and `upper` bounds replaced by the `log()` of the
+#' original bounds. Furthermore, the `$trafo()` is adjusted to include exponentiation of
+#' the budget. Another `$trafo()` function may be present, the exponentiation of the budget
+#' parameter is then followed by a call to the original `$trafo()`.
+#'
+#' @param search_space ([`ParamSet`][paradox::ParamSet])\cr
+#'   Search space to modify. The input is not modified in-place and is cloned instead.
+#' @return [`ParamSet`][paradox::ParamSet]: The search space with the `"budget"`-tagged
+#'   component on a log-scale.
+#' @family smashy configuration functions
+#' @examples
+#'
+#' search_space = ps(
+#'   b = p_int(1, 100, tags = "budget")
+#' )
+#'
+#' ss_t = budget_to_logscale(search_space)
+#'
+#' library("data.table")
+#' d = Design$new(ss_t, data.table(b = log(c(1, 10, 100))), FALSE)
+#'
+#' d
+#'
+#' d$transpose()
+#' @export
+budget_to_logscale = function(search_space) {
+  search_space = assert_r6(search_space, "ParamSet")$clone(deep = TRUE)
+  budget_param = search_space$ids(tags = "budget")
+  if (!search_space$params[[budget_param]]$is_number) stop("parameter of search_space tagged as 'budget' must be numeric (ParamInt or ParamDbl)")
+
+  # budget needs to be log-scale internally, so we re-write the search space here
+  prevtrafo <- search_space$trafo %??% function(x, ...) x
+  if (search_space$params[[budget_param]]$class == "ParamInt") {
+    # ParamInt is a bit more complicated: need to make it Dbl towards the outside, and trafo must do rounding
+    search_space$.__enclos_env__$private$.params[[budget_param]] <- ParamDbl$new(budget_param,
+      lower = log(search_space$params[[budget_param]]$lower),
+      upper = log(search_space$params[[budget_param]]$upper),
+      tags = "budget"
+    )
+    search_space$trafo <- mlr3misc::crate(function(x, param_set) {
+      x[[budget_param]] <- round(exp(x[[budget_param]]))
+      x <- prevtrafo(x, param_set)
+      x
+    }, prevtrafo, budget_param)
+  } else {
+    search_space$params[[budget_param]]$lower = log(search_space$params[[budget_param]]$lower)
+    search_space$params[[budget_param]]$upper = log(search_space$params[[budget_param]]$upper)
+    search_space$trafo <- mlr3misc::crate(function(x, param_set) {
+      x <- prevtrafo(x)
+      x[[budget_param]] <- exp(x[[budget_param]])
+      x
+    }, prevtrafo, budget_param)
+  }
+  search_space
+}
+
 #' @title Configure Full Smashy Optimizer.
 #'
 #' @description
@@ -102,17 +170,22 @@ interpolate_cpv <- function(beginning, end, logscale = FALSE, round = FALSE) {
 #' @section Simulated Annealing:
 #' For the function arguments `filter_factor_first`, `filter_factor_last`,
 #' `select_per_tournament`, and `random_interleave_fraction`, it is possible to also give
-#' corresponding `*.end` arguments. 
+#' corresponding `*.end` arguments.
 #' When the corresponding `*.end` argument differs from the given value, then the effective
 #' value changes over the course of optimization, starting at the given value and progressing
 #' geometrically (for `filter_factor_first`, `filter_factor_last`, and `select_per_tournament`) or
 #' linearly (for `random_interleave_fraction`) towards the `*.end`-value at the end.
 #'
 #' @param search_space ([`ParamSet`][paradox::ParamSet])\cr
-#'   search space, has one parameter tagged 'budget'.
+#'   search space for which [`OptimizerSmashy`] should be configured, has one parameter tagged 'budget'.
+#'   Must be the same search space as of the [`OptimInstanceSingleCrit`][bbotk::OptimInstanceSingleCrit] being
+#'   optimized with the resulting optimizer.\cr
+#'   The budget-parameter must be in log-scale; in most cases
+#'   this means that [`budget_to_logscale()`] must be called on the search space. Note that this should
+#'   be done *before* [`OptimInstanceSingleCrit`][bbotk::OptimInstanceSingleCrit] is created with it, see
+#'   examples.
 #' @param budget_log_step (`numeric(1)`)\cr
-#'   `log()` of budget fidelity steps to make. E.g. `log(2)` for doubling. Must always be on log scale,
-#'   even when `budget_is_logscale` is `FALSE`.
+#'   `log()` of budget fidelity steps to make. E.g. `log(2)` for doubling. Must always be on log scale.
 #' @param mu (`integer(1)`)\cr
 #'   Population size, must be at least 2.
 #' @param survival_fraction (`numeric(1)`)\cr
@@ -172,18 +245,13 @@ interpolate_cpv <- function(beginning, end, logscale = FALSE, round = FALSE) {
 #'   is drawn randomly (`FALSE`), or the number of individuals to draw randomly is itself random (`TRUE`).
 #'   In the latter case, each new configuration has an independent chance of being drawn randomly with
 #'   probability `random_interleave_fraction`. Default `TRUE`.
-#' @param budget_is_logscale (`logical(1)`)\cr
-#'   Whether the component of `search_space` tagged as `"budget"` is in log-scale (`TRUE`) or not (`FALSE`).
-#'   When `budget_is_logscale` is given as `TRUE`, then evaluations are done with linear steps of `budget_log_step`.
-#'   Otherwise, exponential steps of `exp(budget_log_step)` are performed. Default `FALSE`.
 #' @param type (`character(1)`)\cr
 #'   One of `"Optimizer"` or `"Tuner"`. What class to return: An [`Optimizer`][bbotk::Optimizer] for
 #'   optimizing [`OptimInstanceSingleCrit`][bbotk::OptimInstanceSingleCrit] objects, or a
 #'   [`Tuner`][mlr3tuning::Tuner] for tuning [`mlr3::Learner`]s. Defaults to `"Optimizer"`.
 #' @return [`OptimizerSmashy`] or [`TunerSmashy`], depending on the `type` argument: The configured *Smashy* optimizer.
+#' @family smashy configuration functions
 #' @examples
-#' library("bbotk")
-#'
 #' # Define the objective to optimize
 #' # The 'budget' here simulates averaging 'b' samples from a noisy function
 #' objective <- ObjectiveRFun$new(
@@ -196,11 +264,13 @@ interpolate_cpv <- function(beginning, end, logscale = FALSE, round = FALSE) {
 #'   codomain = ps(Obj = p_dbl(tags = "maximize"))
 #' )
 #'
-#' search_space = objective$domain$search_space(list(
+#' search_space_proto = objective$domain$search_space(list(
 #'   x = to_tune(),
 #'   y = to_tune(),
 #'   b = to_tune(p_int(1, 2^10, tags = "budget"))
 #' ))
+#'
+#' search_space = budget_to_logscale(search_space_proto)
 #'
 #' # Get a new OptimInstance. Here we determine that the optimizatoin goes
 #' # for 10 full budget evaluations (10 * 2^100)
@@ -220,7 +290,7 @@ interpolate_cpv <- function(beginning, end, logscale = FALSE, round = FALSE) {
 #'
 #' smashy$optimize(oi)
 #'
-#' @export 
+#' @export
 configure_smashy <- function(search_space, budget_log_step, mu,
     survival_fraction = 1 / 3, sample = "bohb", batch_method = "smashy",
     filter_algorithm = "tournament", surrogate_learner = "knn1", filter_with_max_budget = TRUE,
@@ -228,7 +298,6 @@ configure_smashy <- function(search_space, budget_log_step, mu,
     filter_factor_first.end = filter_factor_first, filter_factor_last.end = filter_factor_last,
     filter_select_per_tournament.end = filter_select_per_tournament, random_interleave_fraction.end = random_interleave_fraction,
     random_interleave_random = TRUE,
-    budget_is_logscale = FALSE,
     type = "Optimizer") {
 
 
@@ -243,8 +312,8 @@ configure_smashy <- function(search_space, budget_log_step, mu,
   assert_choice(batch_method, c("smashy", "hb"))
 
   learnerlist = prepare_learnerlist()
-  
-  
+
+
   # Surrogate Options
   assert_choice(filter_algorithm, c("tournament", "progressive"))  # The two implemented filter algorithms
   assert_choice(surrogate_learner, names(learnerlist))
@@ -265,38 +334,10 @@ configure_smashy <- function(search_space, budget_log_step, mu,
   assert_number(random_interleave_fraction.end, lower = 0, upper = 1)  # fraction of individuals sampled with random interleaving
   assert_flag(random_interleave_random)  # whether the number of random interleaved individuals is drawn from a binomial distribution, or the same each generation
 
-  assert_flag(budget_is_logscale)
   assert_choice(type, c("Optimizer", "Tuner"))
 
   budget_param = search_space$ids(tags = "budget")
   if (!search_space$params[[budget_param]]$is_number) stop("parameter of search_space tagged as 'budget' must be numeric (ParamInt or ParamDbl)")
-  if (!budget_is_logscale) {
-    # budget needs to be log-scale internally, so we re-write the search space here
-    prevtrafo <- search_space$trafo %??% function(x, ...) x
-    if (search_space$params[[budget_param]]$class == "ParamInt") {
-      # ParamInt is a bit more complicated: need to make it Dbl towards the outside, and trafo must do rounding
-      budgetupper <- search_space$params[[budget_param]]$upper
-      search_space$.__enclos_env__$private$.params[[budget_param]] <- ParamDbl$new(budget_param,
-        lower = log(search_space$params[[budget_param]]$lower),
-        upper = log(search_space$params[[budget_param]]$upper + 1),
-        tags = "budget"
-      )
-      search_space$trafo <- mlr3misc::crate(function(x, param_set) {
-        x <- prevtrafo(x, param_set)
-        x[[budget_param]] <- min(floor(exp(x[[budget_param]])), budgetupper)
-        x
-      }, prevtrafo, budget_param, budgetupper)
-    } else {
-      search_space$params[[budget_param]]$lower = log(search_space$params[[budget_param]]$lower)
-      search_space$params[[budget_param]]$upper = log(search_space$params[[budget_param]]$upper)
-      search_space$trafo <- mlr3misc::crate(function(x, param_set) {
-        x <- prevtrafo(x)
-        x[[budget_param]] <- exp(x[[budget_param]])
-        x
-      }, prevtrafo, budget_param)
-
-    }
-  }
 
   # We change the lower limit of the budget parameter:
   # suppose: budget_step is 2, budget param goes from 1 to 6
@@ -379,23 +420,24 @@ configure_smashy <- function(search_space, budget_log_step, mu,
 #' the Hyperband optimizer presented by Li et al. (2018).
 #'
 #' @param search_space ([`ParamSet`][paradox::ParamSet])\cr
-#'   search space, has one parameter tagged 'budget'.
+#'   search space for which [`OptimizerSmashy`] should be configured, has one parameter tagged 'budget'.
+#'   Must be the same search space as of the [`OptimInstanceSingleCrit`][bbotk::OptimInstanceSingleCrit] being
+#'   optimized with the resulting optimizer.\cr
+#'   The budget-parameter must be in log-scale; in most cases
+#'   this means that [`budget_to_logscale()`] must be called on the search space. Note that this should
+#'   be done *before* [`OptimInstanceSingleCrit`][bbotk::OptimInstanceSingleCrit] is created with it, see
+#'   examples.
 #' @param eta (`numeric(1)`)\cr
 #'   Eta-parameter of Hyperband:
 #'   Factor of budget increase and at the same time, one over fraction of configurations that survive, for
 #'   each batch evaluation. Default 3.
-#' @param budget_is_logscale (`logical(1)`)\cr
-#'   Whether the component of `search_space` tagged as `"budget"` is in log-scale (`TRUE`) or not (`FALSE`).
-#'   When `budget_is_logscale` is given as `TRUE`, then evaluations are done with linear steps of `budget_log_step`.
-#'   Otherwise, exponential steps of `exp(budget_log_step)` are performed. Default `FALSE`.
 #' @param type (`character(1)`)\cr
 #'   One of `"Optimizer"` or `"Tuner"`. What class to return: An [`Optimizer`][bbotk::Optimizer] for
 #'   optimizing [`OptimInstanceSingleCrit`][bbotk::OptimInstanceSingleCrit] objects, or a
 #'   [`Tuner`][mlr3tuning::Tuner] for tuning [`mlr3::Learner`]s. Defaults to `"Optimizer"`.
 #' @return [`OptimizerSmashy`] or [`TunerSmashy`], depending on the `type` argument: The configured *Smashy* optimizer.
+#' @family smashy configuration functions
 #' @examples
-#' library("bbotk")
-#'
 #' # Define the objective to optimize
 #' # The 'budget' here simulates averaging 'b' samples from a noisy function
 #' objective <- ObjectiveRFun$new(
@@ -408,28 +450,50 @@ configure_smashy <- function(search_space, budget_log_step, mu,
 #'   codomain = ps(Obj = p_dbl(tags = "maximize"))
 #' )
 #'
-#' search_space = objective$domain$search_space(list(
+#' search_space_proto = objective$domain$search_space(list(
 #'   x = to_tune(),
 #'   y = to_tune(),
-#'   b = to_tune(p_int(1, 2^10, tags = "budget"))
+#'   b = to_tune(p_int(1, 3^3, tags = "budget"))
 #' ))
+#'
+#' search_space = budget_to_logscale(search_space_proto)
 #'
 #' # Get a new OptimInstance. Here we determine that the optimizatoin goes
 #' # for 10 full budget evaluations (10 * 2^100)
 #' oi <- OptimInstanceSingleCrit$new(objective,
 #'   search_space = search_space,
-#'   terminator = trm("budget", budget = 10 * 2^10)
+#'   terminator = trm("gens", generations = 10)
 #' )
 #'
 #' hb = smashy_as_hyperband(search_space)
 #'
 #' hb$optimize(oi)
 #'
-#' @export 
-smashy_as_hyperband <- function(search_space, eta = 3, budget_is_logscale = FALSE, type = "Optimizer") {
+#' # Evaluations done by Hyperband:
+#' ## 1st bracket:
+#' # 1st  generation: 27 @ budget  1 -> b = log(1)  = 0
+#' # 2nd  generation:  9 @ budget  3 -> b = log(3)  = 1.1
+#' # 3rd  generation:  3 @ budget  9 -> b = log(9)  = 2.2
+#' # 4th  generation:  1 @ budget 27 -> b = log(27) = 3.3
+#' ## 2nd bracket:
+#' # 5th  generation: 13 @ budget  3 (b = 1.1)
+#' # 6th  generation:  4 @ budget  9 (b = 2.2)
+#' # 7th  generation:  1 @ budget 27 (b = 3.3)
+#' ## 3rd bracket:
+#' # 8th  generation:  6 @ budget  9 (b = 2.2)
+#' # 9th  generation:  2 @ budget 27 (b = 3.3)
+#' ## 4th bracket:
+#' # 10th generation:  4 @ budget 27 (b = 3.3)
+#'
+#' oi$archive$data[, .N, by = c("b", "dob")]
+#'
+#' # full eval log:
+#' oi$archive
+#'
+#' @export
+smashy_as_hyperband <- function(search_space, eta = 3, type = "Optimizer") {
   budget_param = search_space$ids(tags = "budget")
-  trafo = if (budget_is_logscale) identity else log
-  fidelity_steps = floor((trafo(search_space$upper[budget_param]) - trafo(search_space$lower[budget_param])) / log(eta))
+  fidelity_steps = floor(((search_space$upper[budget_param]) - (search_space$lower[budget_param])) / log(eta))
 
   configure_smashy(search_space,
     budget_log_step = log(eta),
@@ -438,7 +502,6 @@ smashy_as_hyperband <- function(search_space, eta = 3, budget_is_logscale = FALS
     sample = "random",
     batch_method = "hb",
     random_interleave_fraction = 1,
-    budget_is_logscale = budget_is_logscale,
     type = type,
    ## - mandatory arguments that don't have an effect with interleave fraction == 1
     filter_algorithm = "tournament",  # doesn't matter
@@ -456,7 +519,13 @@ smashy_as_hyperband <- function(search_space, eta = 3, budget_is_logscale = FALS
 #' the BOHB optimizer presented by Falkner et al. (2018).
 #'
 #' @param search_space ([`ParamSet`][paradox::ParamSet])\cr
-#'   search space, has one parameter tagged 'budget'.
+#'   search space for which [`OptimizerSmashy`] should be configured, has one parameter tagged 'budget'.
+#'   Must be the same search space as of the [`OptimInstanceSingleCrit`][bbotk::OptimInstanceSingleCrit] being
+#'   optimized with the resulting optimizer.\cr
+#'   The budget-parameter must be in log-scale; in most cases
+#'   this means that [`budget_to_logscale()`] must be called on the search space. Note that this should
+#'   be done *before* [`OptimInstanceSingleCrit`][bbotk::OptimInstanceSingleCrit] is created with it, see
+#'   examples.
 #' @param eta (`numeric(1)`)\cr
 #'   Eta-parameter of BOHB:
 #'   Factor of budget increase and at the same time, one over fraction of configurations that survive, for
@@ -470,18 +539,13 @@ smashy_as_hyperband <- function(search_space, eta = 3, budget_is_logscale = FALS
 #' @param ns (`integer(1)`)\cr
 #'   Surrogate random search rate: How many randomly sampled configurations to evaluate on the surrogate model
 #'   to choose a single configuration to evaluate on the true objective function.
-#' @param budget_is_logscale (`logical(1)`)\cr
-#'   Whether the component of `search_space` tagged as `"budget"` is in log-scale (`TRUE`) or not (`FALSE`).
-#'   When `budget_is_logscale` is given as `TRUE`, then evaluations are done with linear steps of `budget_log_step`.
-#'   Otherwise, exponential steps of `exp(budget_log_step)` are performed. Default `FALSE`.
 #' @param type (`character(1)`)\cr
 #'   One of `"Optimizer"` or `"Tuner"`. What class to return: An [`Optimizer`][bbotk::Optimizer] for
 #'   optimizing [`OptimInstanceSingleCrit`][bbotk::OptimInstanceSingleCrit] objects, or a
 #'   [`Tuner`][mlr3tuning::Tuner] for tuning [`mlr3::Learner`]s. Defaults to `"Optimizer"`.
 #' @return [`OptimizerSmashy`] or [`TunerSmashy`], depending on the `type` argument: The configured *Smashy* optimizer.
+#' @family smashy configuration functions
 #' @examples
-#' library("bbotk")
-#'
 #' # Define the objective to optimize
 #' # The 'budget' here simulates averaging 'b' samples from a noisy function
 #' objective <- ObjectiveRFun$new(
@@ -494,14 +558,16 @@ smashy_as_hyperband <- function(search_space, eta = 3, budget_is_logscale = FALS
 #'   codomain = ps(Obj = p_dbl(tags = "maximize"))
 #' )
 #'
-#' search_space = objective$domain$search_space(list(
+#' search_space_proto = objective$domain$search_space(list(
 #'   x = to_tune(),
 #'   y = to_tune(),
 #'   b = to_tune(p_int(1, 2^10, tags = "budget"))
 #' ))
 #'
+#' search_space = budget_to_logscale(search_space_proto)
+#'
 #' # Get a new OptimInstance. Here we determine that the optimizatoin goes
-#' # for 10 full budget evaluations (10 * 2^100)
+#' # for 10 full budget evaluations (10 * 2^10)
 #' oi <- OptimInstanceSingleCrit$new(objective,
 #'   search_space = search_space,
 #'   terminator = trm("budget", budget = 10 * 2^10)
@@ -511,12 +577,11 @@ smashy_as_hyperband <- function(search_space, eta = 3, budget_is_logscale = FALS
 #'
 #' bohb$optimize(oi)
 #'
-#' @export 
-smashy_as_bohb <- function(search_space, eta = 3, rho = 1 / 3, ns = 64, budget_is_logscale = FALSE, type = "Optimizer") {
+#' @export
+smashy_as_bohb <- function(search_space, eta = 3, rho = 1 / 3, ns = 64, type = "Optimizer") {
 
   budget_param = search_space$ids(tags = "budget")
-  trafo = if (budget_is_logscale) identity else log
-  fidelity_steps = floor((trafo(search_space$upper[budget_param]) - trafo(search_space$lower[budget_param])) / log(eta))
+  fidelity_steps = floor(((search_space$upper[budget_param]) - (search_space$lower[budget_param])) / log(eta))
 
   configure_smashy(search_space,
     budget_log_step = log(eta),
@@ -530,7 +595,6 @@ smashy_as_bohb <- function(search_space, eta = 3, rho = 1 / 3, ns = 64, budget_i
     filter_with_max_budget = TRUE,
     filter_factor_first = ns,
     random_interleave_random = TRUE,
-    budget_is_logscale = budget_is_logscale,
     type = type
   )
 }
