@@ -4,18 +4,17 @@
 \alias{smashy_as_bohb}
 \title{Emulate the BOHB optimizer.}
 \usage{
-smashy_as_bohb(
-  search_space,
-  eta = 3,
-  rho = 1/3,
-  ns = 64,
-  budget_is_logscale = FALSE,
-  type = "Optimizer"
-)
+smashy_as_bohb(search_space, eta = 3, rho = 1/3, ns = 64, type = "Optimizer")
 }
 \arguments{
 \item{search_space}{(\code{\link[paradox:ParamSet]{ParamSet}})\cr
-search space, has one parameter tagged 'budget'.}
+search space for which \code{\link{OptimizerSmashy}} should be configured, has one parameter tagged 'budget'.
+Must be the same search space as of the \code{\link[bbotk:OptimInstanceSingleCrit]{OptimInstanceSingleCrit}} being
+optimized with the resulting optimizer.\cr
+The budget-parameter must be in log-scale; in most cases
+this means that \code{\link[=budget_to_logscale]{budget_to_logscale()}} must be called on the search space. Note that this should
+be done \emph{before} \code{\link[bbotk:OptimInstanceSingleCrit]{OptimInstanceSingleCrit}} is created with it, see
+examples.}
 
 \item{eta}{(\code{numeric(1)})\cr
 Eta-parameter of BOHB:
@@ -33,11 +32,6 @@ here, whereas Falkner et al. (2018) samples these points uniformly at random.}
 Surrogate random search rate: How many randomly sampled configurations to evaluate on the surrogate model
 to choose a single configuration to evaluate on the true objective function.}
 
-\item{budget_is_logscale}{(\code{logical(1)})\cr
-Whether the component of \code{search_space} tagged as \code{"budget"} is in log-scale (\code{TRUE}) or not (\code{FALSE}).
-When \code{budget_is_logscale} is given as \code{TRUE}, then evaluations are done with linear steps of \code{budget_log_step}.
-Otherwise, exponential steps of \code{exp(budget_log_step)} are performed. Default \code{FALSE}.}
-
 \item{type}{(\code{character(1)})\cr
 One of \code{"Optimizer"} or \code{"Tuner"}. What class to return: An \code{\link[bbotk:Optimizer]{Optimizer}} for
 optimizing \code{\link[bbotk:OptimInstanceSingleCrit]{OptimInstanceSingleCrit}} objects, or a
@@ -51,8 +45,6 @@ Create a \code{\link{OptimizerSmashy}} (or \code{\link{TunerSmashy}}) object whi
 the BOHB optimizer presented by Falkner et al. (2018).
 }
 \examples{
-library("bbotk")
-
 # Define the objective to optimize
 # The 'budget' here simulates averaging 'b' samples from a noisy function
 objective <- ObjectiveRFun$new(
@@ -65,14 +57,16 @@ objective <- ObjectiveRFun$new(
   codomain = ps(Obj = p_dbl(tags = "maximize"))
 )
 
-search_space = objective$domain$search_space(list(
+search_space_proto = objective$domain$search_space(list(
   x = to_tune(),
   y = to_tune(),
   b = to_tune(p_int(1, 2^10, tags = "budget"))
 ))
 
+search_space = budget_to_logscale(search_space_proto)
+
 # Get a new OptimInstance. Here we determine that the optimizatoin goes
-# for 10 full budget evaluations (10 * 2^100)
+# for 10 full budget evaluations (10 * 2^10)
 oi <- OptimInstanceSingleCrit$new(objective,
   search_space = search_space,
   terminator = trm("budget", budget = 10 * 2^10)
@@ -83,3 +77,10 @@ bohb = smashy_as_bohb(search_space)
 bohb$optimize(oi)
 
 }
+\seealso{
+Other smashy configuration functions: 
+\code{\link{budget_to_logscale}()},
+\code{\link{configure_smashy}()},
+\code{\link{smashy_as_hyperband}()}
+}
+\concept{smashy configuration functions}

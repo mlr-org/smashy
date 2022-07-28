@@ -213,7 +213,7 @@ Other recombinator wrappers:
 \concept{recombinator wrappers}
 \concept{recombinators}
 \section{Super class}{
-\code{\link[smashy:MiesOperator]{smashy::MiesOperator}} -> \code{OperatorCombination}
+\code{smashy::MiesOperator} -> \code{OperatorCombination}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -252,9 +252,9 @@ See the construction argument. Can be changed during the object's lifetime.}
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -385,7 +385,7 @@ The objects of this class are cloneable with this method.
 }
 }
 \section{Super classes}{
-\code{\link[smashy:MiesOperator]{smashy::MiesOperator}} -> \code{\link[smashy:OperatorCombination]{smashy::OperatorCombination}} -> \code{MutatorCombination}
+\code{smashy::MiesOperator} -> \code{smashy::OperatorCombination} -> \code{MutatorCombination}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -397,10 +397,10 @@ The objects of this class are cloneable with this method.
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="OperatorCombination" data-id="prime"><a href='../../smashy/html/OperatorCombination.html#method-OperatorCombination-prime'><code>smashy::OperatorCombination$prime()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="OperatorCombination" data-id="prime"><a href='../../smashy/html/OperatorCombination.html#method-OperatorCombination-prime'><code>smashy::OperatorCombination$prime()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -457,7 +457,7 @@ The objects of this class are cloneable with this method.
 }
 }
 \section{Super classes}{
-\code{\link[smashy:MiesOperator]{smashy::MiesOperator}} -> \code{\link[smashy:OperatorCombination]{smashy::OperatorCombination}} -> \code{RecombinatorCombination}
+\code{smashy::MiesOperator} -> \code{smashy::OperatorCombination} -> \code{RecombinatorCombination}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -480,10 +480,10 @@ Number of individuals produced for each group of \verb{$n_indivs_in} individuals
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="OperatorCombination" data-id="prime"><a href='../../smashy/html/OperatorCombination.html#method-OperatorCombination-prime'><code>smashy::OperatorCombination$prime()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="OperatorCombination" data-id="prime"><a href='../../smashy/html/OperatorCombination.html#method-OperatorCombination-prime'><code>smashy::OperatorCombination$prime()</code></a></span></li>
 </ul>
 </details>
 }}

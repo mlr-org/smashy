@@ -62,7 +62,7 @@ Other selectors:
 \concept{base classes}
 \concept{selectors}
 \section{Super class}{
-\code{\link[smashy:MiesOperator]{smashy::MiesOperator}} -> \code{Selector}
+\code{smashy::MiesOperator} -> \code{Selector}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -82,10 +82,10 @@ Optimization supported by this \code{Selector}, can be \code{"single-crit"}, \co
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="prime"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-prime'><code>smashy::MiesOperator$prime()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="prime"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-prime'><code>smashy::MiesOperator$prime()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></span></li>
 </ul>
 </details>
 }}

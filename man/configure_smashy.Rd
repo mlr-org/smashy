@@ -23,17 +23,21 @@ configure_smashy(
   filter_select_per_tournament.end = filter_select_per_tournament,
   random_interleave_fraction.end = random_interleave_fraction,
   random_interleave_random = TRUE,
-  budget_is_logscale = FALSE,
   type = "Optimizer"
 )
 }
 \arguments{
 \item{search_space}{(\code{\link[paradox:ParamSet]{ParamSet}})\cr
-search space, has one parameter tagged 'budget'.}
+search space for which \code{\link{OptimizerSmashy}} should be configured, has one parameter tagged 'budget'.
+Must be the same search space as of the \code{\link[bbotk:OptimInstanceSingleCrit]{OptimInstanceSingleCrit}} being
+optimized with the resulting optimizer.\cr
+The budget-parameter must be in log-scale; in most cases
+this means that \code{\link[=budget_to_logscale]{budget_to_logscale()}} must be called on the search space. Note that this should
+be done \emph{before} \code{\link[bbotk:OptimInstanceSingleCrit]{OptimInstanceSingleCrit}} is created with it, see
+examples.}
 
 \item{budget_log_step}{(\code{numeric(1)})\cr
-\code{log()} of budget fidelity steps to make. E.g. \code{log(2)} for doubling. Must always be on log scale,
-even when \code{budget_is_logscale} is \code{FALSE}.}
+\code{log()} of budget fidelity steps to make. E.g. \code{log(2)} for doubling. Must always be on log scale.}
 
 \item{mu}{(\code{integer(1)})\cr
 Population size, must be at least 2.}
@@ -110,11 +114,6 @@ is drawn randomly (\code{FALSE}), or the number of individuals to draw randomly 
 In the latter case, each new configuration has an independent chance of being drawn randomly with
 probability \code{random_interleave_fraction}. Default \code{TRUE}.}
 
-\item{budget_is_logscale}{(\code{logical(1)})\cr
-Whether the component of \code{search_space} tagged as \code{"budget"} is in log-scale (\code{TRUE}) or not (\code{FALSE}).
-When \code{budget_is_logscale} is given as \code{TRUE}, then evaluations are done with linear steps of \code{budget_log_step}.
-Otherwise, exponential steps of \code{exp(budget_log_step)} are performed. Default \code{FALSE}.}
-
 \item{type}{(\code{character(1)})\cr
 One of \code{"Optimizer"} or \code{"Tuner"}. What class to return: An \code{\link[bbotk:Optimizer]{Optimizer}} for
 optimizing \code{\link[bbotk:OptimInstanceSingleCrit]{OptimInstanceSingleCrit}} objects, or a
@@ -143,8 +142,6 @@ linearly (for \code{random_interleave_fraction}) towards the \verb{*.end}-value 
 }
 
 \examples{
-library("bbotk")
-
 # Define the objective to optimize
 # The 'budget' here simulates averaging 'b' samples from a noisy function
 objective <- ObjectiveRFun$new(
@@ -157,11 +154,13 @@ objective <- ObjectiveRFun$new(
   codomain = ps(Obj = p_dbl(tags = "maximize"))
 )
 
-search_space = objective$domain$search_space(list(
+search_space_proto = objective$domain$search_space(list(
   x = to_tune(),
   y = to_tune(),
   b = to_tune(p_int(1, 2^10, tags = "budget"))
 ))
+
+search_space = budget_to_logscale(search_space_proto)
 
 # Get a new OptimInstance. Here we determine that the optimizatoin goes
 # for 10 full budget evaluations (10 * 2^100)
@@ -182,3 +181,10 @@ smashy = configure_smashy(search_space, budget_log_step = log(4), mu = 6)
 smashy$optimize(oi)
 
 }
+\seealso{
+Other smashy configuration functions: 
+\code{\link{budget_to_logscale}()},
+\code{\link{smashy_as_bohb}()},
+\code{\link{smashy_as_hyperband}()}
+}
+\concept{smashy configuration functions}

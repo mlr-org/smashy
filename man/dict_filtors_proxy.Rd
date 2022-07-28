@@ -72,7 +72,7 @@ Other filtor wrappers:
 \concept{filtor wrappers}
 \concept{filtors}
 \section{Super classes}{
-\code{\link[smashy:MiesOperator]{smashy::MiesOperator}} -> \code{\link[smashy:Filtor]{smashy::Filtor}} -> \code{FiltorProxy}
+\code{smashy::MiesOperator} -> \code{smashy::Filtor} -> \code{FiltorProxy}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -93,10 +93,10 @@ Packages needed for the operator. Retrieved from the \code{operation} configurat
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></li>
-<li><span class="pkg-link" data-pkg="smashy" data-topic="Filtor" data-id="needed_input"><a href='../../smashy/html/Filtor.html#method-Filtor-needed_input'><code>smashy::Filtor$needed_input()</code></a></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="operate"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-operate'><code>smashy::MiesOperator$operate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="print"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-print'><code>smashy::MiesOperator$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="MiesOperator" data-id="repr"><a href='../../smashy/html/MiesOperator.html#method-MiesOperator-repr'><code>smashy::MiesOperator$repr()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="smashy" data-topic="Filtor" data-id="needed_input"><a href='../../smashy/html/Filtor.html#method-Filtor-needed_input'><code>smashy::Filtor$needed_input()</code></a></span></li>
 </ul>
 </details>
 }}
