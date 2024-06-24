@@ -90,7 +90,7 @@ LearnerDensityNP = R6Class("LearnerDensityNP", inherit = LearnerDensity,
         }
         d
       }
-      np::npseed(as.integer(runif(1, -2^31 + 1, 2^31 - 1)))
+      np::npseed(as.integer(runif(1, 0, 161803398)))  # https://github.com/JeffreyRacine/R-Package-np/issues/47
       args = self$param_set$get_values(tags = "npudensbw")
       numericize = identical(args$bwmethod, "normal-reference-numeric")
       if (numericize) {
